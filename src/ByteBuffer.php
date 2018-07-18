@@ -17,7 +17,8 @@ class ByteBuffer
         Concerns\Writes\Strings,
         Concerns\Writes\UnsignedInteger,
         Concerns\Initialises,
-        Concerns\Transforms;
+        Concerns\Transforms,
+        Concerns\Offsets;
 
     const BIG_ENDIAN    = 0;
     const LITTLE_ENDIAN = 1;
@@ -102,10 +103,16 @@ class ByteBuffer
         return $this->buffer->getSize();
     }
 
+    public function current(): int
+    {
+        return $this->buffer->current();
+    }
+
     public function clear(): self
     {
         $this->offset = 0;
         $this->limit  = $this->buffer->getSize();
+        $this->buffer->rewind();
 
         return $this;
     }
