@@ -2,7 +2,7 @@
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
-trait Imports
+trait Initialises
 {
     public static function fromBase64(string $value): self
     {
