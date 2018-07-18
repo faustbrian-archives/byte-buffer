@@ -184,7 +184,7 @@ class ByteBuffer
         return $value;
     }
 
-    protected function exceeds($expected, int $actual): void
+    protected function checkForExcess($expected, int $actual): void
     {
         if ($actual > $expected) {
             throw new InvalidArgumentException(sprintf('%d exceeded limit of %d', $actual, $expected));

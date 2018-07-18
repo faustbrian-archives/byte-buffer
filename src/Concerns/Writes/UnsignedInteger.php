@@ -8,7 +8,7 @@ trait UnsignedInteger
     {
         $format = 'C';
 
-        $this->checkForOverSize(0xff, $value);
+        $this->checkForExcess(0xff, $value);
 
         return $this->pack($format, $value, $offset);
     }
@@ -17,7 +17,7 @@ trait UnsignedInteger
     {
         $format = ['n', 'v', 'S'][$this->endianness];
 
-        $this->checkForOverSize(0xffff, $value);
+        $this->checkForExcess(0xffff, $value);
 
         return $this->pack($format, $value, $offset);
     }
@@ -26,7 +26,7 @@ trait UnsignedInteger
     {
         $format = ['N', 'V', 'L'][$this->endianness];
 
-        $this->checkForOverSize(0xffffffff, $value);
+        $this->checkForExcess(0xffffffff, $value);
 
         return $this->pack($format, $value, $offset);
     }
@@ -35,7 +35,7 @@ trait UnsignedInteger
     {
         $format = ['J', 'P', 'Q'][$this->endianness];
 
-        $this->checkForOverSize(0xffffffffffffffff, $value);
+        $this->checkForExcess(0xffffffffffffffff, $value);
 
         return $this->pack($format, $value, $offset);
     }
