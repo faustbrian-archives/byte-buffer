@@ -4,27 +4,64 @@ namespace BrianFaust\ByteBuffer\Concerns\Reads;
 
 trait Strings
 {
-    public function readCString(int $offset = 0): self
+    /**
+     * Reads a NULL-terminated UTF8 encoded string.
+     *
+     * @param int $offset
+     *
+     * @return string
+     */
+    public function readCString(int $offset = 0): string
     {
         return $this;
     }
 
-    public function readIString(int $offset = 0): self
+    /**
+     * Reads a length as uint32 prefixed UTF8 encoded string.
+     *
+     * @param int $offset
+     *
+     * @return string
+     */
+    public function readIString(int $offset = 0): string
     {
         return $this;
     }
 
-    public function readString(int $length, int $offset = 0): self
+    /**
+     * Reads an UTF8 encoded string. This is an alias of readUTF8String.
+     *
+     * @param int $length
+     * @param int $offset
+     *
+     * @return string
+     */
+    public function readString(int $length, int $offset = 0): string
     {
         return $this;
     }
 
-    public function readUTF8String(int $length, int $offset = 0): self
+    /**
+     * Reads an UTF8 encoded string.
+     *
+     * @param int $length
+     * @param int $offset
+     *
+     * @return string
+     */
+    public function readUTF8String(int $length, int $offset = 0): string
     {
         return $this;
     }
 
-    public function readVString(int $offset = 0): self
+    /**
+     * Reads a length as varint32 prefixed UTF8 encoded string.
+     *
+     * @param int $offset
+     *
+     * @return string
+     */
+    public function readVString(int $offset = 0): string
     {
         return $this;
     }

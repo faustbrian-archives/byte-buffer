@@ -4,42 +4,98 @@ namespace BrianFaust\ByteBuffer\Concerns\Reads;
 
 trait Integer
 {
-    public function readInt8(int $offset = 0): self
+    /**
+     * Reads an 8bit signed integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readInt8(int $offset = 0): int
     {
         return $this->unpack('c', $offset);
     }
 
-    public function readInt16(int $offset = 0): self
+    /**
+     * Reads an 16bit signed integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readInt16(int $offset = 0): int
     {
         return $this->unpack('s', $offset);
     }
 
-    public function readInt32(int $offset = 0): self
+    /**
+     * Reads an 32bit signed integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readInt32(int $offset = 0): int
     {
         return $this->unpack('l', $offset);
     }
 
-    public function readInt64(int $offset = 0): self
+    /**
+     * Reads an 64bit signed integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readInt64(int $offset = 0): int
     {
         return $this->unpack('q', $offset);
     }
 
-    public function readByte(int $offset = 0): self
+    /**
+     * Reads an 8bit signed integer. This is an alias of readInt8.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readByte(int $offset = 0): int
     {
         return $this->readInt8($offset);
     }
 
-    public function readShort(int $offset = 0): self
+    /**
+     * Reads an 16bit signed integer. This is an alias of readInt16.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readShort(int $offset = 0): int
     {
         return $this->readInt16($offset);
     }
 
-    public function readInt(int $offset = 0): self
+    /**
+     * Reads an 32bit signed integer. This is an alias of readInt32.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readInt(int $offset = 0): int
     {
         return $this->readInt32($offset);
     }
 
-    public function readLong(int $offset = 0): self
+    /**
+     * Reads an 64bit signed integer. This is an alias of readInt64.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readLong(int $offset = 0): int
     {
         return $this->readInt64($offset);
     }

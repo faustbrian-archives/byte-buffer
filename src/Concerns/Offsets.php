@@ -7,45 +7,45 @@ trait Offsets
     /**
      * Determine if the given offset exists.
      *
-     * @param string $offset
+     * @param int $offset
      *
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(int $offset): bool
     {
-        return $this->buffer->offsetExists($offset);
+        return isset($this->buffer[$offset]);
     }
 
     /**
      * Get the value for a given offset.
      *
-     * @param string $offset
+     * @param int $offset
      *
      * @return mixed
      */
-    public function offsetGet($offset): string
+    public function offsetGet(int $offset)
     {
-        return $this->buffer->offsetGet($offset);
+        return $this->get($offset);
     }
 
     /**
      * Set the value at the given offset.
      *
-     * @param string $offset
-     * @param mixed  $value
+     * @param int   $offset
+     * @param mixed $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(int $offset, $value): void
     {
-        $this->buffer->offsetSet($offset, $value);
+        $this->buffer[$offset] = $value;
     }
 
     /**
      * Unset the value at the given offset.
      *
-     * @param string $offset
+     * @param int $offset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(int $offset): void
     {
-        $this->offsetUnset($offset);
+        unset($this->buffer[$offset]);
     }
 }

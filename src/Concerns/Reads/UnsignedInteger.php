@@ -4,42 +4,98 @@ namespace BrianFaust\ByteBuffer\Concerns\Reads;
 
 trait UnsignedInteger
 {
+    /**
+     * Reads an 8bit unsigned integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
     public function readUInt8(int $offset = 0): int
     {
         return $this->unpack('C', $offset);
     }
 
+    /**
+     * Reads an 16bit unsigned integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
     public function readUInt16(int $offset = 0): int
     {
         return $this->unpack(['n', 'v', 'S'][$this->endianness], $offset);
     }
 
+    /**
+     * Reads an 32bit unsigned integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
     public function readUInt32(int $offset = 0): int
     {
         return $this->unpack(['N', 'V', 'L'][$this->endianness], $offset);
     }
 
+    /**
+     * Reads an 64bit unsigned integer.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
     public function readUInt64(int $offset = 0): int
     {
         return $this->unpack(['J', 'P', 'Q'][$this->endianness], $offset);
     }
 
-    public function readUByte(int $offset = 0): self
+    /**
+     * Reads a 8bit unsigned integer. This is an alias of readUInt8.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readUByte(int $offset = 0): int
     {
         return $this->readUInt8($offset);
     }
 
-    public function readUShort(int $offset = 0): self
+    /**
+     * Reads a 16bit unsigned integer. This is an alias of readUInt16.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readUShort(int $offset = 0): int
     {
         return $this->readUInt16($offset);
     }
 
-    public function readUInt(int $offset = 0): self
+    /**
+     * Reads a 32bit unsigned integer. This is an alias of readUInt32.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readUInt(int $offset = 0): int
     {
         return $this->readUInt32($offset);
     }
 
-    public function readULong(int $offset = 0): self
+    /**
+     * Reads a 64bit unsigned integer. This is an alias of readUInt64.
+     *
+     * @param int $offset
+     *
+     * @return int
+     */
+    public function readULong(int $offset = 0): int
     {
         return $this->readUInt64($offset);
     }

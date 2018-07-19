@@ -5,89 +5,89 @@ namespace BrianFaust\ByteBuffer\Concerns;
 trait Transforms
 {
     /**
-     * Get the buffer as a plain array.
+     * Get the buffer as a binary string.
      *
-     * @param int $start
-     * @param int $end
-     *
-     * @return array
-     */
-    public function toArray(int $start = 0, int $end = 0): array
-    {
-        return $this->buffer->toArray();
-    }
-
-    /**
-     * Get the buffer as a plain base64 string.
-     *
-     * @param int $start
-     * @param int $end
+     * @param int $offset
+     * @param int $length
      *
      * @return array
      */
-    public function toBase64(int $start = 0, int $end = 0): string
+    public function toBinary(int $offset = 0, int $length = 0): string
     {
-        return base64_encode($this->toBinary());
+        return implode('', $this->toArray($offset, $length));
     }
 
     /**
-     * Get the buffer as a plain binary string.
+     * Get the buffer as a hex string.
      *
-     * @param int $start
-     * @param int $end
+     * @param int $offset
+     * @param int $length
      *
      * @return array
      */
-    public function toBinary(int $start = 0, int $end = 0): string
+    public function toHex(int $offset = 0, int $length = 0): string
     {
-        return implode('', $this->toArray());
+        return bin2hex($this->toBinary($offset, $length));
     }
 
     /**
-     * Get the buffer as a plain hex string.
+     * Get the buffer as a UTF-8 string.
      *
-     * @param int $start
-     * @param int $end
+     * @param int $offset
+     * @param int $length
      *
      * @return array
      */
-    public function toHex(int $start = 0, int $end = 0): string
+    public function toUTF8(int $offset = 0, int $length = 0): string
     {
-        return bin2hex($this->toBinary());
+        return mb_convert_encoding($this->toBinary($offset, $length), 'UTF-8', 'UTF-16');
     }
 
     /**
-     * Get the buffer as a plain UTF-8 string.
+     * Get the buffer as a base64 string.
      *
-     * @param int $start
-     * @param int $end
+     * @param int $offset
+     * @param int $length
      *
      * @return array
      */
-    public function toUTF8(int $start = 0, int $end = 0): string
+    public function toBase64(int $offset = 0, int $length = 0): string
     {
-        return mb_convert_encoding($this->toBinary(), 'UTF-8', 'UTF-16');
+        return base64_encode($this->toBinary($offset, $length));
     }
 
     /**
-     * Get the buffer as a plain string.
+     * Get the buffer as an array.
      *
-     * @param int $start
-     * @param int $end
+     * @param int $offset
+     * @param int $length
+     *
+     * @return array
+     */
+    public function toArray(int $offset = 0, int $length = 0): array
+    {
+        return $this->slice($offset, $length);
+    }
+
+    /**
+     * Get the buffer as a string.
+     *
+     * @param int $offset
+     * @param int $length
      *
      * @return string
      */
-    public function toString(string $encoding, int $start = 0, int $end = 0): string
+    public function toString(string $encoding, int $offset = 0, int $length = 0): string
     {
         switch ($encoding) {
-            case 'utf8':
-                return $this->toUTF8($start, $end);
-            case 'base64':
-                return $this->toBase64($start, $end);
-            case 'hex':
-                return $this->toHex($start, $end);
             case 'binary':
-                return $this->toBinary($start, $end);
+                return $this->toBinary($offset, $length);
+            case 'hex':
+                return $this->toHex($offset, $length);
+            case 'base64':
+                return $this->toBase64($offset, $length);
+            case 'utf8':
+                return $this->toUTF8($offset, $length);
             default:
                 throw new \Exception("The encoding [{$encoding}] is not supported.");
         }

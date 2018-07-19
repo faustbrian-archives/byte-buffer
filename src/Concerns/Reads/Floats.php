@@ -4,13 +4,39 @@ namespace BrianFaust\ByteBuffer\Concerns\Reads;
 
 trait Floats
 {
-    public function readFloat(int $offset = 0): float
+    /**
+     * Reads a 32bit float.
+     *
+     * @param int $offset
+     *
+     * @return float
+     */
+    public function readFloat32(int $offset = 0): float
     {
         return $this->unpack(['G', 'g', 'f'][$this->endianness], $offset);
     }
 
-    public function readDouble(int $offset = 0): float
+    /**
+     * Reads a 64bit float.
+     *
+     * @param int $offset
+     *
+     * @return float
+     */
+    public function readFloat64(int $offset = 0): float
     {
         return $this->unpack(['E', 'e', 'd'][$this->endianness], $offset);
+    }
+
+    /**
+     * Reads a 64bit float. This is an alias of readFloat64.
+     *
+     * @param int $offset
+     *
+     * @return float
+     */
+    public function readDouble(int $offset = 0): float
+    {
+        return $this->readFloat64($offset);
     }
 }
