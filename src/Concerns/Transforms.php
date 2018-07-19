@@ -72,8 +72,9 @@ trait Transforms
     /**
      * Get the buffer as a string.
      *
-     * @param int $offset
-     * @param int $length
+     * @param string $encoding
+     * @param int    $offset
+     * @param int    $length
      *
      * @return string
      */

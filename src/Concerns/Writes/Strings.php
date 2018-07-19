@@ -55,7 +55,7 @@ trait Strings
     {
         $length = strlen($value);
 
-        return $this->pack("a{$length}", $value, $offset, $length);
+        return $this->pack("a{$length}", $value, $offset);
     }
 
     /**

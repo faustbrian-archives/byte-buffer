@@ -403,6 +403,8 @@ class ByteBuffer
 
     protected function pack(string $format, $value, int $offset): self
     {
+        $this->skip($offset);
+
         $bytes = pack($format, $value);
 
         for ($i = 0; $i < strlen($bytes); ++$i) {

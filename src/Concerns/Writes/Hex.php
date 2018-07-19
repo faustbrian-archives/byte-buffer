@@ -16,6 +16,6 @@ trait Hex
     {
         $length = strlen($value);
 
-        return $this->pack("H{$length}", $value, $offset, $length);
+        return $this->pack("H{$length}", $value, $offset);
     }
 }
