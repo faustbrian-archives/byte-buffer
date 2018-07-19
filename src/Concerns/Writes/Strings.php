@@ -18,6 +18,35 @@ trait Strings
     }
 
     /**
+     * Writes an UTF8 encoded string. This is an alias of writeUTF8String.
+     *
+     * @param string $value
+     * @param int    $offset
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     */
+    public function writeString(string $value, int $offset = 0): self
+    {
+        return $this->writeUTF8String($value, $offset);
+    }
+
+    /**
+     * Writes an UTF8 encoded string.
+     *
+     * @param string $value
+     * @param int    $offset
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     */
+    public function writeUTF8String(string $value, int $offset = 0): self
+    {
+        $value  = utf8_encode($value);
+        $length = strlen($value);
+
+        return $this->pack("a{$length}", $value, $offset);
+    }
+
+    /**
      * Writes a NULL-terminated UTF8 encoded string.
      *
      * @param string $value
@@ -39,34 +68,6 @@ trait Strings
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public function writeIString(string $value, int $offset = 0): self
-    {
-        return $this;
-    }
-
-    /**
-     * Writes an UTF8 encoded string. This is an alias of writeUTF8String.
-     *
-     * @param string $value
-     * @param int    $offset
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function writeString(string $value, int $offset = 0): self
-    {
-        $length = strlen($value);
-
-        return $this->pack("a{$length}", $value, $offset);
-    }
-
-    /**
-     * Writes an UTF8 encoded string.
-     *
-     * @param string $value
-     * @param int    $offset
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function writeUTF8String(string $value, int $offset = 0): self
     {
         return $this;
     }

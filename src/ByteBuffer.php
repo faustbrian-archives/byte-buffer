@@ -2,7 +2,13 @@
 
 namespace BrianFaust\ByteBuffer;
 
-class ByteBuffer
+class ByteBuffer implements Contracts\Initialisable,
+                            Contracts\Offsetable,
+                            Contracts\Positionable,
+                            Contracts\Readable,
+                            Contracts\Sizeable,
+                            Contracts\Transformable,
+                            Contracts\Writeable
 {
     use Concerns\Capacity,
         Concerns\Initialises,
