@@ -1,7 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of ByteBuffer.
+ *
+ * (c) Brian Faust <envoyer@pm.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace BrianFaust\ByteBuffer;
 
+/**
+ * This is the byte buffer class.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ */
 class ByteBuffer implements Contracts\Initialisable,
                             Contracts\Offsetable,
                             Contracts\Positionable,
@@ -10,21 +26,13 @@ class ByteBuffer implements Contracts\Initialisable,
                             Contracts\Transformable,
                             Contracts\Writeable
 {
-    use Concerns\Capacity,
-        Concerns\Initialises,
-        Concerns\Offsets,
-        Concerns\Positions,
-        Concerns\Transforms,
-        Concerns\Reads\Floats,
-        Concerns\Reads\Hex,
-        Concerns\Reads\Integer,
-        Concerns\Reads\Strings,
-        Concerns\Reads\UnsignedInteger,
-        Concerns\Writes\Floats,
-        Concerns\Writes\Hex,
-        Concerns\Writes\Integer,
-        Concerns\Writes\Strings,
-        Concerns\Writes\UnsignedInteger;
+    use Concerns\Initialisable,
+        Concerns\Offsetable,
+        Concerns\Positionable,
+        Concerns\Readable,
+        Concerns\Sizeable,
+        Concerns\Transformable,
+        Concerns\Writeable;
 
     /**
      * Big endian constant that can be used instead of its numerical value.

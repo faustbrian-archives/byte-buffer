@@ -2,6 +2,11 @@
 
 namespace BrianFaust\ByteBuffer\Contracts;
 
+/**
+ * This is the readable interface.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ */
 interface Readable
 {
     /**

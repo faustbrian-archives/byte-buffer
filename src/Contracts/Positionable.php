@@ -4,6 +4,11 @@ namespace BrianFaust\ByteBuffer\Contracts;
 
 use BrianFaust\ByteBuffer\ByteBuffer;
 
+/**
+ * This is the positionable interface.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ */
 interface Positionable
 {
     /**

@@ -4,6 +4,11 @@ namespace BrianFaust\ByteBuffer\Contracts;
 
 use BrianFaust\ByteBuffer\ByteBuffer;
 
+/**
+ * This is the sizeable interface.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ */
 interface Sizeable
 {
     /**
@@ -20,7 +25,7 @@ interface Sizeable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function ensureCapacity(int $capacity): self;
+    public function ensureCapacity(int $capacity): ByteBuffer;
 
     /**
      * Resizes this ByteBuffer to be backed by a buffer of at least the given capacity.
@@ -29,7 +34,7 @@ interface Sizeable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function resize(int $capacity): self;
+    public function resize(int $capacity): ByteBuffer;
 
     /**
      * Gets the number of remaining readable bytes.

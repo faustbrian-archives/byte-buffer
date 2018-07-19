@@ -2,6 +2,11 @@
 
 namespace BrianFaust\ByteBuffer\Contracts;
 
+/**
+ * This is the offsetable interface.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ */
 interface Offsetable
 {
     /**

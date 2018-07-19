@@ -4,6 +4,11 @@ namespace BrianFaust\ByteBuffer\Contracts;
 
 use BrianFaust\ByteBuffer\ByteBuffer;
 
+/**
+ * This is the initialisable interface.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ */
 interface Initialisable
 {
     /**
@@ -13,7 +18,7 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function fromBinary(string $value): self;
+    public static function fromBinary(string $value): ByteBuffer;
 
     /**
      * Creates a ByteBuffer from a hex string.
@@ -22,7 +27,7 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function fromHex(string $value): self;
+    public static function fromHex(string $value): ByteBuffer;
 
     /**
      * Creates a ByteBuffer from a UTF-8 string.
@@ -31,7 +36,7 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function fromUTF8(string $value): self;
+    public static function fromUTF8(string $value): ByteBuffer;
 
     /**
      * Creates a ByteBuffer from a base64 string.
@@ -40,7 +45,7 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function fromBase64(string $value): self;
+    public static function fromBase64(string $value): ByteBuffer;
 
     /**
      * Creates a ByteBuffer from an array.
@@ -49,7 +54,7 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function fromArray(array $value): self;
+    public static function fromArray(array $value): ByteBuffer;
 
     /**
      * Get the buffer as a plain string.
@@ -59,5 +64,5 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function fromString(string $value, string $encoding): self;
+    public function fromString(string $value, string $encoding): ByteBuffer;
 }
