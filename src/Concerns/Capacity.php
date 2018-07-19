@@ -2,7 +2,7 @@
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
-trait Sizes
+trait Capacity
 {
     /**
      * Gets the capacity of this ByteBuffers backing buffer.

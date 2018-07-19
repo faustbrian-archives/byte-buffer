@@ -37,7 +37,7 @@ trait Initialises
      */
     public static function fromUTF8(string $value): self
     {
-        return new static(mb_convert_encoding($value, 'UTF-16', 'UTF-8'));
+        return new static(mb_convert_encoding($value, 'UTF-8', 'UTF-8'));
     }
 
     /**

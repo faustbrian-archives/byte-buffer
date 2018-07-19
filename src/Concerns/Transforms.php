@@ -40,7 +40,7 @@ trait Transforms
      */
     public function toUTF8(int $offset = 0, int $length = 0): string
     {
-        return mb_convert_encoding($this->toBinary($offset, $length), 'UTF-8', 'UTF-16');
+        return mb_convert_encoding($this->toBinary($offset, $length), 'UTF-8', 'UTF-8');
     }
 
     /**

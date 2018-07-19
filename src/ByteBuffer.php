@@ -4,7 +4,12 @@ namespace BrianFaust\ByteBuffer;
 
 class ByteBuffer
 {
-    use Concerns\Reads\Floats,
+    use Concerns\Capacity,
+        Concerns\Initialises,
+        Concerns\Offsets,
+        Concerns\Positions,
+        Concerns\Transforms,
+        Concerns\Reads\Floats,
         Concerns\Reads\Hex,
         Concerns\Reads\Integer,
         Concerns\Reads\Strings,
@@ -13,12 +18,7 @@ class ByteBuffer
         Concerns\Writes\Hex,
         Concerns\Writes\Integer,
         Concerns\Writes\Strings,
-        Concerns\Writes\UnsignedInteger,
-        Concerns\Initialises,
-        Concerns\Transforms,
-        Concerns\Sizes,
-        Concerns\Positions,
-        Concerns\Offsets;
+        Concerns\Writes\UnsignedInteger;
 
     /**
      * Big endian constant that can be used instead of its numerical value.
