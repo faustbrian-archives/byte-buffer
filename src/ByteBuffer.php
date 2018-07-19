@@ -13,12 +13,16 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer;
 
+use BrianFaust\ByteBuffer\Contracts\Buffable;
+use InvalidArgumentException;
+
 /**
  * This is the byte buffer class.
  *
  * @author Brian Faust <envoyer@pm.me>
  */
-class ByteBuffer implements Contracts\Initialisable,
+class ByteBuffer implements Contracts\Buffable,
+                            Contracts\Initialisable,
                             Contracts\Offsetable,
                             Contracts\Positionable,
                             Contracts\Readable,
@@ -153,9 +157,9 @@ class ByteBuffer implements Contracts\Initialisable,
      *
      * @param array|string|int $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function new($value): self
+    public static function new($value): Buffable
     {
         return new static($value);
     }
@@ -165,11 +169,68 @@ class ByteBuffer implements Contracts\Initialisable,
      *
      * @param int $capacity
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function allocate(int $capacity): self
+    public static function allocate(int $capacity): Buffable
     {
         return new static($capacity);
+    }
+
+    /**
+     * Initialise a new buffer from the given content.
+     *
+     * @param int              $length
+     * @param string|int|array $content
+     */
+    public function initializeBuffer(int $length, $content): void
+    {
+        for ($i = 0; $i < $length; ++$i) {
+            $this->buffer[$i] = $content[$i];
+        }
+
+        $this->length = $length;
+    }
+
+    /**
+     * Pack data into binary string.
+     *
+     * @param string     $format
+     * @param string|int $value
+     * @param int        $offset
+     *
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     */
+    public function pack(string $format, $value, int $offset): Buffable
+    {
+        $this->skip($offset);
+
+        $bytes = pack($format, $value);
+
+        for ($i = 0; $i < strlen($bytes); ++$i) {
+            $this->buffer[$this->offset++] = $bytes[$i];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Unpack data from binary string.
+     *
+     * @param string $format
+     * @param int    $offset
+     *
+     * @return string|int
+     */
+    public function unpack(string $format, int $offset = 0)
+    {
+        $value = unpack($format, $this->toBinary($offset), $offset ?: $this->offset)[1];
+
+        try {
+            $this->skip($offset ?: LengthMap::get($format));
+        } catch (InvalidArgumentException $e) {
+        }
+
+        return $value;
     }
 
     /**
@@ -189,9 +250,9 @@ class ByteBuffer implements Contracts\Initialisable,
      *
      * @param array $buffers
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function concat(...$buffers): self
+    public static function concat(...$buffers): Buffable
     {
         $initial = $buffers[0];
 
@@ -208,9 +269,9 @@ class ByteBuffer implements Contracts\Initialisable,
      * @param mixed $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function append($value, int $offset = 0): self
+    public function append($value, int $offset = 0): Buffable
     {
         if ($value instanceof self) {
             $value = $value->toArray($offset);
@@ -230,12 +291,12 @@ class ByteBuffer implements Contracts\Initialisable,
     /**
      * Appends this ByteBuffers contents to another ByteBuffer.
      *
-     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
-     * @param int                               $offset
+     * @param \BrianFaust\ByteBuffer\Contracts\Buffable $buffer
+     * @param int                                       $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function appendTo(self $buffer, int $offset = 0): self
+    public function appendTo(self $buffer, int $offset = 0): Buffable
     {
         return $buffer->append($this);
     }
@@ -246,9 +307,9 @@ class ByteBuffer implements Contracts\Initialisable,
      * @param mixed $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function prepend($value, int $offset = 0): self
+    public function prepend($value, int $offset = 0): Buffable
     {
         if ($value instanceof self) {
             $value = $value->toArray($offset);
@@ -272,12 +333,12 @@ class ByteBuffer implements Contracts\Initialisable,
     /**
      * Prepends this ByteBuffers contents to another ByteBuffer.
      *
-     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
-     * @param int                               $offset
+     * @param \BrianFaust\ByteBuffer\Contracts\Buffable $buffer
+     * @param int                                       $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function prependTo(self $buffer, int $offset = 0): self
+    public function prependTo(self $buffer, int $offset = 0): Buffable
     {
         return $buffer->prepend($this, $offset);
     }
@@ -288,9 +349,9 @@ class ByteBuffer implements Contracts\Initialisable,
      * @param int $length
      * @param int $start
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function fill(int $length, int $start = 0): self
+    public function fill(int $length, int $start = 0): Buffable
     {
         $this->buffer = array_fill($start, $length, pack('x'));
 
@@ -302,9 +363,9 @@ class ByteBuffer implements Contracts\Initialisable,
     /**
      * Makes this ByteBuffer ready for a new sequence of write or relative read operations.
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function flip(): self
+    public function flip(): Buffable
     {
         $this->length  = $this->offset;
         $this->offset  = 0;
@@ -317,9 +378,9 @@ class ByteBuffer implements Contracts\Initialisable,
      *
      * @param int $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function order(int $value): self
+    public function order(int $value): Buffable
     {
         $this->endianness = $value;
 
@@ -332,9 +393,9 @@ class ByteBuffer implements Contracts\Initialisable,
      * @param int $start
      * @param int $length
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function reverse(int $start = 0, int $length = 0): self
+    public function reverse(int $start = 0, int $length = 0): Buffable
     {
         if ($start === $length) {
             return $this;
@@ -406,38 +467,13 @@ class ByteBuffer implements Contracts\Initialisable,
         return 2 === $this->endianness;
     }
 
-    protected function initializeBuffer(int $length, $content): void
-    {
-        for ($i = 0; $i < $length; ++$i) {
-            $this->buffer[$i] = $content[$i];
-        }
-
-        $this->length = $length;
-    }
-
-    protected function pack(string $format, $value, int $offset): self
-    {
-        $this->skip($offset);
-
-        $bytes = pack($format, $value);
-
-        for ($i = 0; $i < strlen($bytes); ++$i) {
-            $this->buffer[$this->offset++] = $bytes[$i];
-        }
-
-        return $this;
-    }
-
-    protected function unpack(string $format, int $offset = 0)
-    {
-        $value = unpack($format, $this->toBinary($offset), $offset ?: $this->offset)[1];
-
-        $this->skip($offset ?: LengthMap::get($format));
-
-        return $value;
-    }
-
-    protected function checkForExcess($expected, int $actual): void
+    /**
+     * [checkForExcess description].
+     *
+     * @param int $expected
+     * @param int $actual
+     */
+    protected function checkForExcess(int $expected, int $actual): void
     {
         if ($actual > $expected) {
             throw new InvalidArgumentException("{$actual} exceeded length of {$expected}");

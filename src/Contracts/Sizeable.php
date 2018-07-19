@@ -2,8 +2,6 @@
 
 namespace BrianFaust\ByteBuffer\Contracts;
 
-use BrianFaust\ByteBuffer\ByteBuffer;
-
 /**
  * This is the sizeable interface.
  *
@@ -23,18 +21,18 @@ interface Sizeable
      *
      * @param int $capacity
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function ensureCapacity(int $capacity): ByteBuffer;
+    public function ensureCapacity(int $capacity): Buffable;
 
     /**
      * Resizes this ByteBuffer to be backed by a buffer of at least the given capacity.
      *
      * @param int $capacity
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function resize(int $capacity): ByteBuffer;
+    public function resize(int $capacity): Buffable;
 
     /**
      * Gets the number of remaining readable bytes.

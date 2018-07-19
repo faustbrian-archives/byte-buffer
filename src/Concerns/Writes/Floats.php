@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns\Writes;
 
+use BrianFaust\ByteBuffer\Contracts\Buffable;
+
 /**
  * This is the floats writer trait.
  *
@@ -26,9 +28,9 @@ trait Floats
      * @param float $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeFloat32(float $value, int $offset = 0): self
+    public function writeFloat32(float $value, int $offset = 0): Buffable
     {
         $this->checkForExcess(0xffffffff, $value);
 
@@ -41,9 +43,9 @@ trait Floats
      * @param float $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeFloat64(float $value, int $offset = 0): self
+    public function writeFloat64(float $value, int $offset = 0): Buffable
     {
         $this->checkForExcess(0xffffffffffffffff, $value);
 
@@ -56,9 +58,9 @@ trait Floats
      * @param float $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeDouble(float $value, int $offset = 0): self
+    public function writeDouble(float $value, int $offset = 0): Buffable
     {
         return $this->writeFloat64($value, $offset);
     }

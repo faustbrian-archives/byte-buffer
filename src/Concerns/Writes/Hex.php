@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns\Writes;
 
+use BrianFaust\ByteBuffer\Contracts\Buffable;
+
 /**
  * This is the hex writer trait.
  *
@@ -26,9 +28,9 @@ trait Hex
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeHex(string $value, int $offset = 0): self
+    public function writeHex(string $value, int $offset = 0): Buffable
     {
         $length = strlen($value);
 

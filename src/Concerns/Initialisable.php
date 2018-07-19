@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
+use BrianFaust\ByteBuffer\Contracts\Buffable;
+
 /**
  * This is the initialisable trait.
  *
@@ -25,9 +27,9 @@ trait Initialisable
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromBinary(string $value): self
+    public static function fromBinary(string $value): Buffable
     {
         return new static($value);
     }
@@ -37,9 +39,9 @@ trait Initialisable
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromHex(string $value): self
+    public static function fromHex(string $value): Buffable
     {
         return new static(hex2bin($value));
     }
@@ -49,9 +51,9 @@ trait Initialisable
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromUTF8(string $value): self
+    public static function fromUTF8(string $value): Buffable
     {
         return new static(mb_convert_encoding($value, 'UTF-8', 'UTF-8'));
     }
@@ -61,9 +63,9 @@ trait Initialisable
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromBase64(string $value): self
+    public static function fromBase64(string $value): Buffable
     {
         return new static(base64_decode($value, true));
     }
@@ -73,9 +75,9 @@ trait Initialisable
      *
      * @param array $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromArray(array $value): self
+    public static function fromArray(array $value): Buffable
     {
         return new static($value);
     }
@@ -86,9 +88,9 @@ trait Initialisable
      * @param string $value
      * @param string $encoding
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function fromString(string $value, string $encoding): self
+    public function fromString(string $value, string $encoding): Buffable
     {
         switch ($encoding) {
             case 'binary':

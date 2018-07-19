@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns\Writes;
 
+use BrianFaust\ByteBuffer\Contracts\Buffable;
+
 /**
  * This is the unsigned integer writer trait.
  *
@@ -26,9 +28,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUInt8(int $value, int $offset = 0): self
+    public function writeUInt8(int $value, int $offset = 0): Buffable
     {
         $format = 'C';
 
@@ -43,9 +45,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUInt16(int $value, int $offset = 0): self
+    public function writeUInt16(int $value, int $offset = 0): Buffable
     {
         $format = ['n', 'v', 'S'][$this->endianness];
 
@@ -60,9 +62,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUInt32(int $value, int $offset = 0): self
+    public function writeUInt32(int $value, int $offset = 0): Buffable
     {
         $format = ['N', 'V', 'L'][$this->endianness];
 
@@ -77,9 +79,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUInt64(int $value, int $offset = 0): self
+    public function writeUInt64(int $value, int $offset = 0): Buffable
     {
         $format = ['J', 'P', 'Q'][$this->endianness];
 
@@ -94,9 +96,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUByte(int $value, int $offset = 0): self
+    public function writeUByte(int $value, int $offset = 0): Buffable
     {
         return $this->writeUInt8($value, $offset);
     }
@@ -107,9 +109,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUShort(int $value, int $offset = 0): self
+    public function writeUShort(int $value, int $offset = 0): Buffable
     {
         return $this->writeUInt16($value, $offset);
     }
@@ -120,9 +122,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeUInt(int $value, int $offset = 0): self
+    public function writeUInt(int $value, int $offset = 0): Buffable
     {
         return $this->writeUInt32($value, $offset);
     }
@@ -133,9 +135,9 @@ trait UnsignedInteger
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function writeULong(int $value, int $offset = 0): self
+    public function writeULong(int $value, int $offset = 0): Buffable
     {
         return $this->writeUInt64($value, $offset);
     }

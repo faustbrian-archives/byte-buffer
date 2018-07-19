@@ -32,29 +32,32 @@ interface Readable
     /**
      * Reads a NULL-terminated UTF8 encoded string.
      *
+     * @param int $length
      * @param int $offset
      *
      * @return string
      */
-    public function readCString(int $offset = 0): string;
+    public function readCString(int $length, int $offset = 0): string;
 
     /**
      * Reads a length as uint32 prefixed UTF8 encoded string.
      *
+     * @param int $length
      * @param int $offset
      *
      * @return string
      */
-    public function readIString(int $offset = 0): string;
+    public function readIString(int $length, int $offset = 0): string;
 
     /**
      * Reads a length as varint32 prefixed UTF8 encoded string.
      *
+     * @param int $length
      * @param int $offset
      *
      * @return string
      */
-    public function readVString(int $offset = 0): string;
+    public function readVString(int $length, int $offset = 0): string;
 
     /**
      * Reads a 32bit float.

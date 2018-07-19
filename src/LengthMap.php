@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer;
 
+use InvalidArgumentException;
+
 /**
  * This is the length map class.
  *

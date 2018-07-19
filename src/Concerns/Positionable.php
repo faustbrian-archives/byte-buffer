@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
+use BrianFaust\ByteBuffer\Contracts\Buffable;
+
 /**
  * This is the positionable trait.
  *
@@ -35,9 +37,9 @@ trait Positionable
      *
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function position(int $offset): self
+    public function position(int $offset): Buffable
     {
         $this->offset = $offset;
 
@@ -49,9 +51,9 @@ trait Positionable
      *
      * @param int $length
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function skip(int $length): self
+    public function skip(int $length): Buffable
     {
         $this->offset += $length;
 
@@ -61,9 +63,9 @@ trait Positionable
     /**
      * Resets this ByteBuffers offset.
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function reset(): self
+    public function reset(): Buffable
     {
         $this->offset = 0;
 
@@ -73,9 +75,9 @@ trait Positionable
     /**
      * Clears this ByteBuffers offsets.
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function clear(): self
+    public function clear(): Buffable
     {
         $this->offset = 0;
         $this->length = count($this->buffer);

@@ -2,8 +2,6 @@
 
 namespace BrianFaust\ByteBuffer\Contracts;
 
-use BrianFaust\ByteBuffer\ByteBuffer;
-
 /**
  * This is the initialisable interface.
  *
@@ -16,45 +14,45 @@ interface Initialisable
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromBinary(string $value): ByteBuffer;
+    public static function fromBinary(string $value): Buffable;
 
     /**
      * Creates a ByteBuffer from a hex string.
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromHex(string $value): ByteBuffer;
+    public static function fromHex(string $value): Buffable;
 
     /**
      * Creates a ByteBuffer from a UTF-8 string.
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromUTF8(string $value): ByteBuffer;
+    public static function fromUTF8(string $value): Buffable;
 
     /**
      * Creates a ByteBuffer from a base64 string.
      *
      * @param string $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromBase64(string $value): ByteBuffer;
+    public static function fromBase64(string $value): Buffable;
 
     /**
      * Creates a ByteBuffer from an array.
      *
      * @param array $value
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public static function fromArray(array $value): ByteBuffer;
+    public static function fromArray(array $value): Buffable;
 
     /**
      * Get the buffer as a plain string.
@@ -62,7 +60,7 @@ interface Initialisable
      * @param string $value
      * @param string $encoding
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function fromString(string $value, string $encoding): ByteBuffer;
+    public function fromString(string $value, string $encoding): Buffable;
 }

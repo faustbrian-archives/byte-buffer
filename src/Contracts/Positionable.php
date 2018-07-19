@@ -2,8 +2,6 @@
 
 namespace BrianFaust\ByteBuffer\Contracts;
 
-use BrianFaust\ByteBuffer\ByteBuffer;
-
 /**
  * This is the positionable interface.
  *
@@ -23,30 +21,30 @@ interface Positionable
      *
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function position(int $offset): ByteBuffer;
+    public function position(int $offset): Buffable;
 
     /**
      * Skips the next `length` bytes. May also be negative to move the offset back.
      *
      * @param int $length
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function skip(int $length): ByteBuffer;
+    public function skip(int $length): Buffable;
 
     /**
      * Resets this ByteBuffers offset.
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function reset(): ByteBuffer;
+    public function reset(): Buffable;
 
     /**
      * Clears this ByteBuffers offsets.
      *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function clear(): ByteBuffer;
+    public function clear(): Buffable;
 }
