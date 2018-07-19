@@ -4,7 +4,12 @@ namespace BrianFaust\ByteBuffer;
 
 class LengthMap
 {
-    private static $map = [
+    /**
+     * [$lengths description].
+     *
+     * @var array
+     */
+    private static $lengths = [
         // Chars (8 bit)
         'c' => 1,
         'C' => 1,
@@ -33,23 +38,30 @@ class LengthMap
         'P' => 8,
         'Q' => 8,
 
-        // Float
+        // Float (32 bit)
         'G' => 4,
         'g' => 4,
         'f' => 4,
 
-        // Double
+        // Float (64 bit)
         'E' => 8,
         'e' => 8,
         'd' => 8,
     ];
 
-    public static function get(string $format, int $default = 0): int
+    /**
+     * Get a value from the list of lengths.
+     *
+     * @param string $format
+     *
+     * @return int
+     */
+    public static function get(string $format): int
     {
-        if (!array_key_exists($format, static::$map)) {
-            return $default;
+        if (!array_key_exists($format, static::$lengths)) {
+            throw new InvalidArgumentException("The given format [{$format}] is not supported.");
         }
 
-        return static::$map[$format];
+        return static::$lengths[$format];
     }
 }

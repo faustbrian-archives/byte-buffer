@@ -1,6 +1,6 @@
 # ByteBuffer
 
-> A fast and simple ByteBuffer implementation using SplFixedArray.
+> A fast and simple ByteBuffer implementation using native arrays.
 
 [![Build Status](https://travis-ci.org/faustbrian/byte-buffer.svg)](https://travis-ci.org/faustbrian/byte-buffer)
 [![Codecov](https://img.shields.io/codecov/c/github/faustbrian/byte-buffer/master.svg)](https://codecov.io/gh/faustbrian/byte-buffer)

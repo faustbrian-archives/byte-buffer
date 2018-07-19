@@ -48,11 +48,11 @@ class ByteBuffer
     private $offset = 0;
 
     /**
-     * Absolute limit of the contained data.
+     * Absolute length of the contained data.
      *
      * @var int
      */
-    private $limit;
+    private $length;
 
     /**
      * Whether to use big endian, little endian or machine byte order.
@@ -152,7 +152,7 @@ class ByteBuffer
      *
      * @param array|string|int $value
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function new($value): self
     {
@@ -164,7 +164,7 @@ class ByteBuffer
      *
      * @param int $capacity
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function allocate(int $capacity): self
     {
@@ -183,6 +183,13 @@ class ByteBuffer
         return $this->attributes[$offset];
     }
 
+    /**
+     * Concatenates multiple ByteBuffers into one.
+     *
+     * @param array $buffers
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     */
     public static function concat(...$buffers): self
     {
         $initial = $buffers[0];
@@ -192,11 +199,6 @@ class ByteBuffer
         }
 
         return $initial;
-    }
-
-    public function wrap(self $buffer): self
-    {
-        return $this;
     }
 
     /**
@@ -298,8 +300,8 @@ class ByteBuffer
      */
     public function clear(): self
     {
-        $this->offset = 0;
-        $this->limit  = count($this->buffer);
+        $this->offset  = 0;
+        $this->length  = count($this->buffer);
 
         return $this;
     }
@@ -346,8 +348,8 @@ class ByteBuffer
      */
     public function flip(): self
     {
-        $this->limit  = $this->offset;
-        $this->offset = 0;
+        $this->length  = $this->offset;
+        $this->offset  = 0;
 
         return $this;
     }
@@ -373,7 +375,7 @@ class ByteBuffer
      */
     public function remaining(): int
     {
-        return $this->limit - $this->offset;
+        return $this->length - $this->offset;
     }
 
     /**
@@ -397,8 +399,8 @@ class ByteBuffer
      */
     public function resize(int $capacity): self
     {
-        $this->buffer = $this->slice(0, $capacity);
-        $this->limit  = $capacity;
+        $this->buffer  = $this->slice(0, $capacity);
+        $this->length  = $capacity;
 
         return $this;
     }
@@ -503,7 +505,7 @@ class ByteBuffer
             $this->buffer[$i] = $content[$i];
         }
 
-        $this->limit = $length;
+        $this->length = $length;
     }
 
     protected function pack(string $format, $value, int $offset): self
@@ -529,7 +531,7 @@ class ByteBuffer
     protected function checkForExcess($expected, int $actual): void
     {
         if ($actual > $expected) {
-            throw new InvalidArgumentException("{$actual} exceeded limit of {$expected}");
+            throw new InvalidArgumentException("{$actual} exceeded length of {$expected}");
         }
     }
 }

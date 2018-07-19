@@ -9,7 +9,7 @@ trait Initialises
      *
      * @param string $value
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function fromBinary(string $value): self
     {
@@ -21,7 +21,7 @@ trait Initialises
      *
      * @param string $value
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function fromHex(string $value): self
     {
@@ -33,7 +33,7 @@ trait Initialises
      *
      * @param string $value
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function fromUTF8(string $value): self
     {
@@ -45,7 +45,7 @@ trait Initialises
      *
      * @param string $value
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function fromBase64(string $value): self
     {
@@ -57,7 +57,7 @@ trait Initialises
      *
      * @param array $value
      *
-     * @return static
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
     public static function fromArray(array $value): self
     {
@@ -70,9 +70,9 @@ trait Initialises
      * @param string $value
      * @param string $encoding
      *
-     * @return string
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function fromString(string $value, string $encoding): string
+    public function fromString(string $value, string $encoding): self
     {
         switch ($encoding) {
             case 'binary':
