@@ -4,6 +4,13 @@ namespace BrianFaust\ByteBuffer\Concerns\Reads;
 
 trait Hex
 {
+    /**
+     * Reads a base16 encoded string.
+     *
+     * @param int $length
+     *
+     * @return string
+     */
     public function readHex(int $length): string
     {
         $length *= 2;

@@ -16,6 +16,8 @@ class ByteBuffer
         Concerns\Writes\UnsignedInteger,
         Concerns\Initialises,
         Concerns\Transforms,
+        Concerns\Sizes,
+        Concerns\Positions,
         Concerns\Offsets;
 
     /**
@@ -85,21 +87,6 @@ class ByteBuffer
                 throw new InvalidArgumentException('Constructor argument must be a binary string or integer.');
                 break;
         }
-    }
-
-    /**
-     * Handle dynamic calls to the container to set attributes.
-     *
-     * @param string $method
-     * @param array  $parameters
-     *
-     * @return $this
-     */
-    public function __call(string $method, array $parameters)
-    {
-        $this->attributes[$method] = count($parameters) > 0 ? $parameters[0] : true;
-
-        return $this;
     }
 
     /**
@@ -180,7 +167,7 @@ class ByteBuffer
      */
     public function get(int $offset)
     {
-        return $this->attributes[$offset];
+        return $this->buffer[$offset];
     }
 
     /**
@@ -215,6 +202,10 @@ class ByteBuffer
             $value = $value->toArray($offset);
         }
 
+        if (is_string($value)) {
+            $value = str_split($value);
+        }
+
         $buffer = array_merge($this->buffer, $value);
 
         $this->initializeBuffer(count($buffer), $buffer);
@@ -223,16 +214,16 @@ class ByteBuffer
     }
 
     /**
-     * Appends this ByteBuffer's contents to another ByteBuffer.
+     * Appends this ByteBuffers contents to another ByteBuffer.
      *
-     * @param \BrianFaust\ByteBuffer\ByteBuffer $target
+     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
      * @param int                               $offset
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function appendTo(self $target, int $offset = 0): self
+    public function appendTo(self $buffer, int $offset = 0): self
     {
-        return $target->append($this);
+        return $buffer->append($this);
     }
 
     /**
@@ -249,6 +240,10 @@ class ByteBuffer
             $value = $value->toArray($offset);
         }
 
+        if (is_string($value)) {
+            $value = str_split($value);
+        }
+
         $buffer = $this->buffer;
 
         foreach (array_reverse($value) as $item) {
@@ -261,71 +256,20 @@ class ByteBuffer
     }
 
     /**
-     * Prepends this ByteBuffer's contents to another ByteBuffer.
+     * Prepends this ByteBuffers contents to another ByteBuffer.
      *
-     * @param \BrianFaust\ByteBuffer\ByteBuffer $target
+     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
      * @param int                               $offset
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function prependTo(self $target, int $offset = 0): self
+    public function prependTo(self $buffer, int $offset = 0): self
     {
-        return $target->prepend($this, $offset);
+        return $buffer->prepend($this, $offset);
     }
 
     /**
-     * Gets the capacity of this ByteBuffer's backing buffer.
-     *
-     * @return int
-     */
-    public function capacity(): int
-    {
-        return count($this->buffer);
-    }
-
-    /**
-     * Gets the absolute read/write offset.
-     *
-     * @return int
-     */
-    public function current(): int
-    {
-        return $this->offset;
-    }
-
-    /**
-     * Clears this ByteBuffer's offsets.
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function clear(): self
-    {
-        $this->offset  = 0;
-        $this->length  = count($this->buffer);
-
-        return $this;
-    }
-
-    /**
-     * Makes sure that this ByteBuffer is backed by a buffer of at least the specified capacity.
-     *
-     * @param int $capacity
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function ensureCapacity(int $capacity): self
-    {
-        $current = $this->capacity();
-
-        if ($current < $capacity) {
-            return $this->resize(($current *= 2) > $capacity ? $current : $capacity);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Overwrites this ByteBuffer's contents with the specified value.
+     * Overwrites this ByteBuffers contents with the specified value.
      *
      * @param int $length
      * @param int $start
@@ -369,44 +313,7 @@ class ByteBuffer
     }
 
     /**
-     * Gets the number of remaining readable bytes.
-     *
-     * @return int
-     */
-    public function remaining(): int
-    {
-        return $this->length - $this->offset;
-    }
-
-    /**
-     * Resets this ByteBuffers offset.
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function reset(): self
-    {
-        $this->offset = 0;
-
-        return $this;
-    }
-
-    /**
-     * Resizes this ByteBuffer to be backed by a buffer of at least the given capacity.
-     *
-     * @param int $capacity
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function resize(int $capacity): self
-    {
-        $this->buffer  = $this->slice(0, $capacity);
-        $this->length  = $capacity;
-
-        return $this;
-    }
-
-    /**
-     * Reverses this ByteBuffer's contents.
+     * Reverses this ByteBuffers contents.
      *
      * @param int $start
      * @param int $length
@@ -422,20 +329,6 @@ class ByteBuffer
         $reversed = array_reverse($this->slice($this->buffer, $start, $length));
 
         $this->initializeBuffer(count($reversed), $reversed);
-
-        return $this;
-    }
-
-    /**
-     * Skips the next `length` bytes. May also be negative to move the offset back.
-     *
-     * @param int $length
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function skip(int $length): self
-    {
-        $this->offset += $length;
 
         return $this;
     }

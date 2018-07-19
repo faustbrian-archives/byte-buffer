@@ -14,6 +14,8 @@ trait Floats
      */
     public function writeFloat32(float $value, int $offset = 0): self
     {
+        $this->checkForExcess(0xffffffff, $value);
+
         return $this->pack(['G', 'g', 'f'][$this->endianness], $value, $offset);
     }
 
@@ -27,6 +29,8 @@ trait Floats
      */
     public function writeFloat64(float $value, int $offset = 0): self
     {
+        $this->checkForExcess(0xffffffffffffffff, $value);
+
         return $this->pack(['E', 'e', 'd'][$this->endianness], $value, $offset);
     }
 
@@ -38,7 +42,7 @@ trait Floats
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeFloat64(float $value, int $offset = 0): self
+    public function writeDouble(float $value, int $offset = 0): self
     {
         return $this->writeFloat64($value, $offset);
     }
