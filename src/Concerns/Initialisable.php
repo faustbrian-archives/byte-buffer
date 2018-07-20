@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace BrianFaust\ByteBuffer\Concerns;
 
 use BrianFaust\ByteBuffer\Contracts\Buffable;
+use InvalidArgumentException;
 
 /**
  * This is the initialisable trait.
@@ -102,7 +103,7 @@ trait Initialisable
             case 'base64':
                 return static::fromBase64($value, $encoding);
             default:
-                throw new \Exception("The encoding [{$encoding}] is not supported.");
+                throw new InvalidArgumentException("The encoding [{$encoding}] is not supported.");
         }
     }
 }

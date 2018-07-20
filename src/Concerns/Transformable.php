@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
+use InvalidArgumentException;
+
 /**
  * This is the transformable trait.
  *
@@ -106,7 +108,7 @@ trait Transformable
             case 'utf8':
                 return $this->toUTF8($offset, $length);
             default:
-                throw new \Exception("The encoding [{$encoding}] is not supported.");
+                throw new InvalidArgumentException("The encoding [{$encoding}] is not supported.");
         }
     }
 }

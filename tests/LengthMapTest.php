@@ -66,6 +66,6 @@ class LengthMapTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        LengthMap::get('POSIX');
+        LengthMap::get('_INVALID_');
     }
 }

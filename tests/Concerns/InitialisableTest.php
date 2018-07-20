@@ -97,4 +97,12 @@ class InitialisableTest extends TestCase
 
         $this->assertSame($this->expected, $buffer->toHex());
     }
+
+    /** @test */
+    public function it_should_throw_for_invalid_type()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        ByteBuffer::fromString('Hello World 😄', '_INVALID_');
+    }
 }
