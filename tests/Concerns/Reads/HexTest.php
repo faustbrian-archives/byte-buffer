@@ -28,19 +28,21 @@ class HexTest extends TestCase
     public function it_should_read_hex()
     {
         $buffer = ByteBuffer::new(0);
-        $buffer->writeBytes('48656c6c6f20576f726c64');
+        $buffer->writeHex('48656c6c6f20576f726c64');
+        $buffer->position(0);
 
-        $this->assertSame(22, $buffer->capacity());
-        $this->assertSame(bin2hex('48656c6c6f20576f726c64'), $buffer->readHex(44));
+        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame('48656c6c6f20576f726c64', $buffer->readHex(22));
     }
 
     /** @test */
     public function it_should_read_hex_as_string()
     {
         $buffer = ByteBuffer::new(0);
-        $buffer->writeBytes('48656c6c6f20576f726c64');
+        $buffer->writeHex('48656c6c6f20576f726c64');
+        $buffer->position(0);
 
-        $this->assertSame(22, $buffer->capacity());
-        $this->assertSame('Hello World', $buffer->readHexString(44));
+        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame('Hello World', $buffer->readHexString(22));
     }
 }

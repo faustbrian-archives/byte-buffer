@@ -28,9 +28,10 @@ class HexTest extends TestCase
     public function it_should_write_hex()
     {
         $buffer = ByteBuffer::new(0);
-        $buffer->writeBytes('48656c6c6f20576f726c64');
+        $buffer->writeHex('48656c6c6f20576f726c64');
+        $buffer->position(0);
 
-        $this->assertSame(22, $buffer->capacity());
-        $this->assertSame('Hello World', $buffer->readHexString(44));
+        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame('Hello World', $buffer->readHexString(22));
     }
 }

@@ -41,6 +41,6 @@ trait Hex
      */
     public function readHexString(int $length): string
     {
-        return hex2bin(hex2bin($this->readHex($length)));
+        return hex2bin($this->readHex($length));
     }
 }
