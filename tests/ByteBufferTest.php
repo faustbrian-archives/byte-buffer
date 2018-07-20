@@ -59,4 +59,39 @@ class ByteBufferTest extends TestCase
         $this->assertInstanceOf(ByteBuffer::class, $buffer);
         $this->assertSame(11, $buffer->capacity());
     }
+
+    /** @test */
+    public function it_should_test_if_the_given_value_is_a_byte_buffer()
+    {
+        $buffer = ByteBuffer::allocate(11);
+
+        $this->assertTrue($buffer->isByteBuffer($buffer));
+    }
+
+    /** @test */
+    public function it_should_test_if_the_buffer_is_big_endian()
+    {
+        $buffer = ByteBuffer::allocate(11);
+        $buffer->order(0);
+
+        $this->assertTrue($buffer->isBigEndian());
+    }
+
+    /** @test */
+    public function it_should_test_if_the_buffer_is_little_endian()
+    {
+        $buffer = ByteBuffer::allocate(11);
+        $buffer->order(1);
+
+        $this->assertTrue($buffer->isLittleEndian());
+    }
+
+    /** @test */
+    public function it_should_test_if_the_buffer_is_machine_byte()
+    {
+        $buffer = ByteBuffer::allocate(11);
+        $buffer->order(2);
+
+        $this->assertTrue($buffer->isMachineByte());
+    }
 }
