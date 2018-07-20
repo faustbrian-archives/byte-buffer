@@ -17,7 +17,10 @@ use BrianFaust\ByteBuffer\ByteBuffer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversNothing
+ * This is the unsigned integer reader test class.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ * @covers \BrianFaust\ByteBuffer\Concerns\Reads\UnsignedInteger
  */
 class UnsignedIntegerTest extends TestCase
 {

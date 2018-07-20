@@ -17,7 +17,10 @@ use BrianFaust\ByteBuffer\ByteBuffer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversNothing
+ * This is the initialisable test class.
+ *
+ * @author Brian Faust <envoyer@pm.me>
+ * @covers \BrianFaust\ByteBuffer\Concerns\Initialisable
  */
 class InitialisableTest extends TestCase
 {
