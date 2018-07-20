@@ -69,7 +69,7 @@ trait Strings
      */
     public function readIString(int $length, int $offset = 0): string
     {
-        return $this;
+        return $this->readString($length, 4 + $offset);
     }
 
     /**
@@ -82,6 +82,6 @@ trait Strings
      */
     public function readVString(int $length, int $offset = 0): string
     {
-        return $this;
+        return $this->readString($length, 1 + $offset);
     }
 }

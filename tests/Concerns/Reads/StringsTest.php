@@ -53,4 +53,24 @@ class StringsTest extends TestCase
 
         $this->assertSame('Hello World', $buffer->readCString(11));
     }
+
+    /** @test */
+    public function it_should_read_i_string()
+    {
+        $buffer = ByteBuffer::new(1);
+        $buffer->writeIString('Hello World');
+        $buffer->position(0);
+
+        $this->assertSame('Hello World', $buffer->readIString(11));
+    }
+
+    /** @test */
+    public function it_should_write_v_string()
+    {
+        $buffer = ByteBuffer::new(1);
+        $buffer->writeVString('Hello World');
+        $buffer->position(0);
+
+        $this->assertSame('Hello World', $buffer->readVString(11));
+    }
 }

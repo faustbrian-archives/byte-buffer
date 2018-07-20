@@ -74,7 +74,7 @@ trait Strings
      */
     public function writeCString(string $value, int $offset = 0): Buffable
     {
-        $value  = utf8_encode($value);
+        $value  = utf8_encode($value.' ');
         $length = strlen($value);
 
         return $this->pack("Z{$length}", $value, $offset);
@@ -90,7 +90,10 @@ trait Strings
      */
     public function writeIString(string $value, int $offset = 0): Buffable
     {
-        return $this;
+        $this->fill(3);
+        $this->pack('C', 2, 0);
+
+        return $this->writeUTF8String($value, $offset);
     }
 
     /**
@@ -103,6 +106,8 @@ trait Strings
      */
     public function writeVString(string $value, int $offset = 0): Buffable
     {
-        return $this;
+        $this->pack('C', 2, 0);
+
+        return $this->writeUTF8String($value, $offset);
     }
 }

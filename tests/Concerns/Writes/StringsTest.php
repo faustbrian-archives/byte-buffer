@@ -46,8 +46,26 @@ class StringsTest extends TestCase
     public function it_should_write_c_string()
     {
         $buffer = ByteBuffer::new(1);
-        $buffer->writeCString('Hello World ');
+        $buffer->writeCString('Hello World');
 
         $this->assertSame(12, $buffer->capacity());
+    }
+
+    /** @test */
+    public function it_should_write_i_string()
+    {
+        $buffer = ByteBuffer::new(1);
+        $buffer->writeIString('Hello World');
+
+        $this->assertSame('0000000248656c6c6f20576f726c64', $buffer->toHex());
+    }
+
+    /** @test */
+    public function it_should_write_v_string()
+    {
+        $buffer = ByteBuffer::new(1);
+        $buffer->writeVString('Hello World');
+
+        $this->assertSame('0248656c6c6f20576f726c64', $buffer->toHex());
     }
 }
