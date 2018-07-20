@@ -241,7 +241,7 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function get(int $offset)
     {
-        return $this->buffer[$offset];
+        return $this->offsetGet($offset);
     }
 
     /**

@@ -41,7 +41,7 @@ trait Offsetable
      */
     public function offsetGet(int $offset)
     {
-        return $this->get($offset);
+        return $this->buffer[$offset];
     }
 
     /**
