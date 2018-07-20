@@ -91,7 +91,7 @@ trait Strings
     public function writeIString(string $value, int $offset = 0): Buffable
     {
         $this->fill(3);
-        $this->pack('C', 2, 0);
+        $this->pack('C', strlen($value), 0);
 
         return $this->writeUTF8String($value, $offset);
     }
@@ -106,7 +106,7 @@ trait Strings
      */
     public function writeVString(string $value, int $offset = 0): Buffable
     {
-        $this->pack('C', 2, 0);
+        $this->pack('C', strlen($value), 0);
 
         return $this->writeUTF8String($value, $offset);
     }

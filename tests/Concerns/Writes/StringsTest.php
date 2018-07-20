@@ -49,6 +49,7 @@ class StringsTest extends TestCase
         $buffer->writeCString('Hello World');
 
         $this->assertSame(12, $buffer->capacity());
+        $this->assertSame('48656c6c6f20576f726c6400', $buffer->toHex());
     }
 
     /** @test */
@@ -57,7 +58,8 @@ class StringsTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeIString('Hello World');
 
-        $this->assertSame('0000000248656c6c6f20576f726c64', $buffer->toHex());
+        $this->assertSame(15, $buffer->capacity());
+        $this->assertSame('0000000b48656c6c6f20576f726c64', $buffer->toHex());
     }
 
     /** @test */
@@ -66,6 +68,7 @@ class StringsTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeVString('Hello World');
 
-        $this->assertSame('0248656c6c6f20576f726c64', $buffer->toHex());
+        $this->assertSame(12, $buffer->capacity());
+        $this->assertSame('0b48656c6c6f20576f726c64', $buffer->toHex());
     }
 }
