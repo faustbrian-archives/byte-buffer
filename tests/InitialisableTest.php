@@ -59,7 +59,7 @@ class InitialisableTest extends TestCase
     }
 
     /** @test */
-    public function it_should_initialise_from_fromArray()
+    public function it_should_initialise_from_array()
     {
         $buffer = ByteBuffer::fromArray(str_split('Hello World 😄'));
 
