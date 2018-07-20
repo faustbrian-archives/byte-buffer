@@ -192,7 +192,7 @@ class ByteBuffer implements Contracts\Buffable,
     }
 
     /**
-     * Pack data into binary string.
+     * Pack data into a binary string.
      *
      * @param string     $format
      * @param string|int $value
@@ -214,7 +214,7 @@ class ByteBuffer implements Contracts\Buffable,
     }
 
     /**
-     * Unpack data from binary string.
+     * Unpack data from a binary string.
      *
      * @param string $format
      * @param int    $offset
@@ -223,12 +223,11 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function unpack(string $format, int $offset = 0)
     {
-        $value = unpack($format, $this->toBinary($offset), $offset ?: $this->offset)[1];
+        $this->skip($offset);
 
-        try {
-            $this->skip($offset ?: LengthMap::get($format));
-        } catch (InvalidArgumentException $e) {
-        }
+        $value = unpack($format, $this->toBinary(), $this->offset)[1];
+
+        $this->skip(LengthMap::get($format));
 
         return $value;
     }
@@ -473,7 +472,7 @@ class ByteBuffer implements Contracts\Buffable,
      * @param int $expected
      * @param int $actual
      */
-    protected function checkForExcess(int $expected, int $actual): void
+    protected function checkForExcess($expected, $actual): void
     {
         if ($actual > $expected) {
             throw new InvalidArgumentException("{$actual} exceeded length of {$expected}");

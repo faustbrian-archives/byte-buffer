@@ -29,9 +29,7 @@ trait Hex
      */
     public function readHex(int $length): string
     {
-        $length *= 2;
-
-        return $this->unpack("H{$length}", $length / 2);
+        return $this->unpack("H{$length}");
     }
 
     public function readHexBytes(int $length): string

@@ -23,11 +23,11 @@ use InvalidArgumentException;
 class LengthMap
 {
     /**
-     * [$lengths description].
+     * Available formats and the bit size required to store them.
      *
      * @var array
      */
-    private static $lengths = [
+    const LENGTHS = [
         // Chars (8 bit)
         'c' => 1,
         'C' => 1,
@@ -76,10 +76,18 @@ class LengthMap
      */
     public static function get(string $format): int
     {
-        if (!array_key_exists($format, static::$lengths)) {
+        if (in_array($format[0], ['a', 'd', 'f'])) {
+            return (int) substr($format, 1);
+        }
+
+        if (in_array($format[0], ['h', 'H'])) {
+            return (int) substr($format, 1) / 2;
+        }
+
+        if (!array_key_exists($format, static::LENGTHS)) {
             throw new InvalidArgumentException("The given format [{$format}] is not supported.");
         }
 
-        return static::$lengths[$format];
+        return static::LENGTHS[$format];
     }
 }
