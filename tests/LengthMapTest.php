@@ -60,4 +60,12 @@ class LengthMapTest extends TestCase
     {
         $this->assertSame(1, LengthMap::get('C'));
     }
+
+    /** @test */
+    public function it_should_throw_for_invalid_type()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        LengthMap::get('POSIX');
+    }
 }
