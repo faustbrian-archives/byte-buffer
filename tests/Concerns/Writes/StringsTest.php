@@ -25,6 +25,15 @@ use PHPUnit\Framework\TestCase;
 class StringsTest extends TestCase
 {
     /** @test */
+    public function it_should_write_bytes()
+    {
+        $buffer = ByteBuffer::new(0);
+        $buffer->writeBytes('Hello World');
+
+        $this->assertSame(11, $buffer->capacity());
+    }
+
+    /** @test */
     public function it_should_write_string()
     {
         $buffer = ByteBuffer::new(1);
