@@ -86,6 +86,14 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
+    public function it_should_throw_for_invalid_type()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $buffer = ByteBuffer::new(123.456);
+    }
+
+    /** @test */
     public function it_should_allocate_the_given_number_of_bytes()
     {
         $buffer = ByteBuffer::allocate(11);
