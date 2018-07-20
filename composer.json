@@ -1,7 +1,7 @@
 {
     "name": "faustbrian/byte-buffer",
     "description": "A fast and simple ByteBuffer implementation using SplFixedArray.",
-    "keywords": ["byte", "buffer"],
+    "keywords": ["byte", "buffer", "pack", "unpack", "binary", "hex"],
     "license": "MIT",
     "authors": [{
         "name": "Brian Faust",

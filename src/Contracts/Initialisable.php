@@ -62,5 +62,5 @@ interface Initialisable
      *
      * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
-    public function fromString(string $value, string $encoding): Buffable;
+    public static function fromString(string $value, string $encoding): Buffable;
 }
