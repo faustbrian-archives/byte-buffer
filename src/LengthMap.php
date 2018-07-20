@@ -76,7 +76,7 @@ class LengthMap
      */
     public static function get(string $format): int
     {
-        if (in_array($format[0], ['a', 'd', 'f'], true)) {
+        if (in_array($format[0], ['a', 'd', 'f', 'Z'], true)) {
             return (int) substr($format, 1);
         }
 
