@@ -34,7 +34,7 @@ trait Floats
     {
         $this->checkForExcess(0xffffffff, $value);
 
-        return $this->pack(['G', 'g', 'f'][$this->endianness], $value, $offset);
+        return $this->pack(['G', 'g', 'f'][$this->order], $value, $offset);
     }
 
     /**
@@ -49,7 +49,7 @@ trait Floats
     {
         $this->checkForExcess(0xffffffffffffffff, $value);
 
-        return $this->pack(['E', 'e', 'd'][$this->endianness], $value, $offset);
+        return $this->pack(['E', 'e', 'd'][$this->order], $value, $offset);
     }
 
     /**

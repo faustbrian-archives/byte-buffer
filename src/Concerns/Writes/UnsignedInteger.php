@@ -49,7 +49,7 @@ trait UnsignedInteger
      */
     public function writeUInt16(int $value, int $offset = 0): Buffable
     {
-        $format = ['n', 'v', 'S'][$this->endianness];
+        $format = ['n', 'v', 'S'][$this->order];
 
         $this->checkForExcess(0xffff, $value);
 
@@ -66,7 +66,7 @@ trait UnsignedInteger
      */
     public function writeUInt32(int $value, int $offset = 0): Buffable
     {
-        $format = ['N', 'V', 'L'][$this->endianness];
+        $format = ['N', 'V', 'L'][$this->order];
 
         $this->checkForExcess(0xffffffff, $value);
 
@@ -83,7 +83,7 @@ trait UnsignedInteger
      */
     public function writeUInt64(int $value, int $offset = 0): Buffable
     {
-        $format = ['J', 'P', 'Q'][$this->endianness];
+        $format = ['J', 'P', 'Q'][$this->order];
 
         $this->checkForExcess(0xffffffffffffffff, $value);
 

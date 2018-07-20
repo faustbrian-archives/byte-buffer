@@ -41,7 +41,7 @@ trait UnsignedInteger
      */
     public function readUInt16(int $offset = 0): int
     {
-        return $this->unpack(['n', 'v', 'S'][$this->endianness], $offset);
+        return $this->unpack(['n', 'v', 'S'][$this->order], $offset);
     }
 
     /**
@@ -53,7 +53,7 @@ trait UnsignedInteger
      */
     public function readUInt32(int $offset = 0): int
     {
-        return $this->unpack(['N', 'V', 'L'][$this->endianness], $offset);
+        return $this->unpack(['N', 'V', 'L'][$this->order], $offset);
     }
 
     /**
@@ -65,7 +65,7 @@ trait UnsignedInteger
      */
     public function readUInt64(int $offset = 0): int
     {
-        return $this->unpack(['J', 'P', 'Q'][$this->endianness], $offset);
+        return $this->unpack(['J', 'P', 'Q'][$this->order], $offset);
     }
 
     /**

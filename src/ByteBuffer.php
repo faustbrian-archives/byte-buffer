@@ -79,7 +79,7 @@ class ByteBuffer implements Contracts\Buffable,
      *
      * @var int
      */
-    private $endianness = 1;
+    private $order = 1;
 
     /**
      * Constructs a new ByteBuffer.
@@ -381,7 +381,7 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function order(int $value): Buffable
     {
-        $this->endianness = $value;
+        $this->order = $value;
 
         return $this;
     }
@@ -443,7 +443,7 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function isBigEndian(): bool
     {
-        return 0 === $this->endianness;
+        return 0 === $this->order;
     }
 
     /**
@@ -453,7 +453,7 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function isLittleEndian(): bool
     {
-        return 1 === $this->endianness;
+        return 1 === $this->order;
     }
 
     /**
@@ -463,7 +463,7 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function isMachineByte(): bool
     {
-        return 2 === $this->endianness;
+        return 2 === $this->order;
     }
 
     /**

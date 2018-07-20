@@ -29,7 +29,7 @@ trait Floats
      */
     public function readFloat32(int $offset = 0): float
     {
-        return $this->unpack(['G', 'g', 'f'][$this->endianness], $offset);
+        return $this->unpack(['G', 'g', 'f'][$this->order], $offset);
     }
 
     /**
@@ -41,7 +41,7 @@ trait Floats
      */
     public function readFloat64(int $offset = 0): float
     {
-        return $this->unpack(['E', 'e', 'd'][$this->endianness], $offset);
+        return $this->unpack(['E', 'e', 'd'][$this->order], $offset);
     }
 
     /**
