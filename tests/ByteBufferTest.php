@@ -99,6 +99,68 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
+    public function it_should_concat_the_given_buffers()
+    {
+        $hello = ByteBuffer::new('Hello');
+        $world = ByteBuffer::new('World');
+
+        $buffer = ByteBuffer::concat($hello, $world);
+
+        $this->assertSame("HelloWorld", $buffer->toUTF8());
+    }
+
+    /** @test */
+    public function it_should_append_the_given_buffer()
+    {
+        $buffer = ByteBuffer::new('Hello');
+        $buffer->append(ByteBuffer::new('World'));
+
+        $this->assertSame("HelloWorld", $buffer->toUTF8());
+    }
+    /** @test */
+    public function it_should_append_the_given_buffer_to_another()
+    {
+        $buffer = ByteBuffer::new('Hello');
+
+        ByteBuffer::new('World')->appendTo($buffer);
+
+        $this->assertSame("HelloWorld", $buffer->toUTF8());
+    }
+
+    /** @test */
+    public function it_should_prepend_the_given_buffer()
+    {
+        $buffer = ByteBuffer::new('World');
+        $buffer->prepend(ByteBuffer::new('Hello'));
+
+        $this->assertSame("HelloWorld", $buffer->toUTF8());
+    }
+    /** @test */
+    public function it_should_prepend_the_given_buffer_to_another()
+    {
+        $buffer = ByteBuffer::new('World');
+
+        ByteBuffer::new('Hello')->prependTo($buffer);
+
+        $this->assertSame("HelloWorld", $buffer->toUTF8());
+    }
+
+    // fill
+    // flip
+    // order
+    // reverse
+    // sliceconcat
+    // append
+    // appendTo
+    // prepend
+    // prependTo
+    // fill
+    // flip
+    // order
+    // reverse
+    // slice
+
+    /** @test */
     public function it_should_test_if_the_given_value_is_a_byte_buffer()
     {
         $buffer = ByteBuffer::allocate(11);
