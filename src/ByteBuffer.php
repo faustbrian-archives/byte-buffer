@@ -463,12 +463,12 @@ class ByteBuffer implements Contracts\Buffable,
     }
 
     /**
-     * [checkForExcess description].
+     * Check if the actual value exceeds the expected value in size.
      *
      * @param int $expected
      * @param int $actual
      */
-    protected function checkForExcess($expected, $actual): void
+    public function checkForExcess($expected, $actual): void
     {
         if ($actual > $expected) {
             throw new InvalidArgumentException("{$actual} exceeded length of {$expected}");

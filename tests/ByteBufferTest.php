@@ -95,7 +95,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::allocate(11);
         $buffer->pack('C', 255, 0);
 
-        $this->assertSame(255, unpack('C', $buffer->offsetGet(0))[1]);
+        $this->assertSame(255, unpack('C', $buffer->get(0))[1]);
     }
 
     /** @test */
@@ -119,6 +119,15 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
+    public function it_should_append_the_given_string()
+    {
+        $buffer = ByteBuffer::new('Hello');
+        $buffer->append('World');
+
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
+    }
+
+    /** @test */
     public function it_should_append_the_given_buffer_to_another()
     {
         $buffer = ByteBuffer::new('Hello');
@@ -133,6 +142,15 @@ class ByteBufferTest extends TestCase
     {
         $buffer = ByteBuffer::new('World');
         $buffer->prepend(ByteBuffer::new('Hello'));
+
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
+    }
+
+    /** @test */
+    public function it_should_prepend_the_given_string()
+    {
+        $buffer = ByteBuffer::new('World');
+        $buffer->prepend('Hello');
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
     }
@@ -225,5 +243,15 @@ class ByteBufferTest extends TestCase
         $buffer->order(2);
 
         $this->assertTrue($buffer->isMachineByte());
+    }
+
+    /** @test */
+    public function it_should_test_if_the_given_value_exceeds_the_maximum()
+    {
+        $buffer = ByteBuffer::allocate(11);
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        $buffer->checkForExcess(0xff, 0xffff);
     }
 }
