@@ -21,18 +21,6 @@ namespace BrianFaust\ByteBuffer\Concerns;
 trait Offsetable
 {
     /**
-     * Determine if the given offset exists.
-     *
-     * @param int $offset
-     *
-     * @return bool
-     */
-    public function offsetExists(int $offset): bool
-    {
-        return isset($this->buffer[$offset]);
-    }
-
-    /**
      * Get the value for a given offset.
      *
      * @param int $offset
@@ -53,6 +41,18 @@ trait Offsetable
     public function offsetSet(int $offset, $value): void
     {
         $this->buffer[$offset] = $value;
+    }
+
+    /**
+     * Determine if the given offset exists.
+     *
+     * @param int $offset
+     *
+     * @return bool
+     */
+    public function offsetExists(int $offset): bool
+    {
+        return isset($this->buffer[$offset]);
     }
 
     /**

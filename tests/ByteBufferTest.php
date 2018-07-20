@@ -25,6 +25,40 @@ use PHPUnit\Framework\TestCase;
 class ByteBufferTest extends TestCase
 {
     /** @test */
+    public function it_should_get_the_value_at_the_given_offset()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+
+        $this->assertSame('e', $buffer->__get(1));
+    }
+
+    /** @test */
+    public function it_should_set_the_value_at_the_given_offset()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+        $buffer->__set(1, 'X');
+
+        $this->assertSame('X', $buffer->__get(1));
+    }
+
+    /** @test */
+    public function it_should_check_if_the_offset_exists()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+
+        $this->assertTrue($buffer->__isset(1));
+    }
+
+    /** @test */
+    public function it_should_unset_the_value_at_the_given_offset()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+        $buffer->__unset(1);
+
+        $this->assertFalse($buffer->__isset(1));
+    }
+
+    /** @test */
     public function it_should_initialise_from_array()
     {
         $buffer = ByteBuffer::new(str_split('Hello World'));
@@ -90,7 +124,7 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
-    public function it_should_get_the_value_at_the_given_offset()
+    public function it_should_get_the_value()
     {
         $buffer = ByteBuffer::allocate(11);
         $buffer->pack('C', 255, 0);
