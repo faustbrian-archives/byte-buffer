@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\Tests\ByteBuffer;
 
-use BrianFaust\ByteBuffer\ByteBuffer;
 use BrianFaust\ByteBuffer\LengthMap;
 use PHPUnit\Framework\TestCase;
 
