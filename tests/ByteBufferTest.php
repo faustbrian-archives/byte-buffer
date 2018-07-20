@@ -106,7 +106,7 @@ class ByteBufferTest extends TestCase
 
         $buffer = ByteBuffer::concat($hello, $world);
 
-        $this->assertSame("HelloWorld", $buffer->toUTF8());
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
     }
 
     /** @test */
@@ -115,8 +115,9 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new('Hello');
         $buffer->append(ByteBuffer::new('World'));
 
-        $this->assertSame("HelloWorld", $buffer->toUTF8());
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
     }
+
     /** @test */
     public function it_should_append_the_given_buffer_to_another()
     {
@@ -124,7 +125,7 @@ class ByteBufferTest extends TestCase
 
         ByteBuffer::new('World')->appendTo($buffer);
 
-        $this->assertSame("HelloWorld", $buffer->toUTF8());
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
     }
 
     /** @test */
@@ -133,8 +134,9 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new('World');
         $buffer->prepend(ByteBuffer::new('Hello'));
 
-        $this->assertSame("HelloWorld", $buffer->toUTF8());
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
     }
+
     /** @test */
     public function it_should_prepend_the_given_buffer_to_another()
     {
@@ -142,23 +144,53 @@ class ByteBufferTest extends TestCase
 
         ByteBuffer::new('Hello')->prependTo($buffer);
 
-        $this->assertSame("HelloWorld", $buffer->toUTF8());
+        $this->assertSame('HelloWorld', $buffer->toUTF8());
     }
 
-    // fill
-    // flip
-    // order
-    // reverse
-    // sliceconcat
-    // append
-    // appendTo
-    // prepend
-    // prependTo
-    // fill
-    // flip
-    // order
-    // reverse
-    // slice
+    /** @test */
+    public function it_should_fill_the_buffer_with_the_given_number_of_bytes()
+    {
+        $buffer = ByteBuffer::new(1);
+        $buffer->fill(11);
+
+        $this->assertSame(11, $buffer->capacity());
+    }
+
+    /** @test */
+    public function it_should_flip_the_limit_and_offset()
+    {
+        $buffer = ByteBuffer::new(10);
+        $buffer->flip();
+
+        $this->assertSame(10, $buffer->capacity());
+        $this->assertSame(0, $buffer->current());
+    }
+
+    /** @test */
+    public function it_should_set_the_byte_order()
+    {
+        $buffer = ByteBuffer::new(1);
+        $buffer->order(0);
+
+        $this->assertTrue($buffer->isBigEndian());
+    }
+
+    /** @test */
+    public function it_should_reverse_the_buffer_contents()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+        $buffer->reverse();
+
+        $this->assertSame('dlroW olleH', $buffer->toUTF8());
+    }
+
+    /** @test */
+    public function it_should_slice_the_buffer_contents()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+
+        $this->assertSame(str_split('Hello'), $buffer->slice(0, 5));
+    }
 
     /** @test */
     public function it_should_test_if_the_given_value_is_a_byte_buffer()

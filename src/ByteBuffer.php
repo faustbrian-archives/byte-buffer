@@ -366,8 +366,8 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function flip(): Buffable
     {
-        $this->length  = $this->offset;
-        $this->offset  = 0;
+        $this->length = $this->offset;
+        $this->offset = 0;
 
         return $this;
     }
@@ -396,11 +396,7 @@ class ByteBuffer implements Contracts\Buffable,
      */
     public function reverse(int $start = 0, int $length = 0): Buffable
     {
-        if ($start === $length) {
-            return $this;
-        }
-
-        $reversed = array_reverse($this->slice($this->buffer, $start, $length));
+        $reversed = array_reverse($this->slice($start, $length));
 
         $this->initializeBuffer(count($reversed), $reversed);
 
@@ -410,12 +406,12 @@ class ByteBuffer implements Contracts\Buffable,
     /**
      * Extract a slice of the ByteBuffer.
      *
-     * @param int| $offset
-     * @param int| $length
+     * @param int $offset
+     * @param int $length
      *
      * @return array
      */
-    public function slice(int $offset = 0, int $length = 0): array
+    public function slice(int $offset, int $length): array
     {
         if ($length <= 0) {
             return $this->buffer;
