@@ -103,7 +103,6 @@ class ByteBuffer implements Contracts\Buffable,
 
             default:
                 throw new InvalidArgumentException('Constructor argument must be a binary string or integer.');
-                break;
         }
     }
 
