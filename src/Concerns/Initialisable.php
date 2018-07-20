@@ -94,13 +94,13 @@ trait Initialisable
     {
         switch ($encoding) {
             case 'binary':
-                return $this->fromBinary($value, $encoding);
+                return static::fromBinary($value, $encoding);
             case 'hex':
-                return $this->fromHex($value, $encoding);
+                return static::fromHex($value, $encoding);
             case 'utf8':
-                return $this->fromUTF8($value, $encoding);
+                return static::fromUTF8($value, $encoding);
             case 'base64':
-                return $this->fromBase64($value, $encoding);
+                return static::fromBase64($value, $encoding);
             default:
                 throw new \Exception("The encoding [{$encoding}] is not supported.");
         }

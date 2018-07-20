@@ -65,4 +65,36 @@ class InitialisableTest extends TestCase
 
         $this->assertSame($this->expected, $buffer->toHex());
     }
+
+    /** @test */
+    public function it_should_initialise_from_string_as_binary()
+    {
+        $buffer = ByteBuffer::fromString('Hello World 😄', 'binary');
+
+        $this->assertSame($this->expected, $buffer->toHex());
+    }
+
+    /** @test */
+    public function it_should_initialise_from_string_as_hex()
+    {
+        $buffer = ByteBuffer::fromString('48656c6c6f20576f726c6420f09f9884', 'hex');
+
+        $this->assertSame($this->expected, $buffer->toHex());
+    }
+
+    /** @test */
+    public function it_should_initialise_from_string_as_utf8()
+    {
+        $buffer = ByteBuffer::fromString('Hello World 😄', 'utf8');
+
+        $this->assertSame($this->expected, $buffer->toHex());
+    }
+
+    /** @test */
+    public function it_should_initialise_from_string_as_base64()
+    {
+        $buffer = ByteBuffer::fromString(base64_encode('Hello World 😄'), 'base64');
+
+        $this->assertSame($this->expected, $buffer->toHex());
+    }
 }

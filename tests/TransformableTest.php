@@ -63,4 +63,36 @@ class TransformableTest extends TestCase
 
         $this->assertSame(str_split('Hello World 😄'), $buffer->toArray());
     }
+
+    /** @test */
+    public function it_should_transform_to_string_as_binary()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertSame('Hello World 😄', $buffer->toString('binary'));
+    }
+
+    /** @test */
+    public function it_should_transform_to_string_as_hex()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertSame('48656c6c6f20576f726c6420f09f9884', $buffer->toString('hex'));
+    }
+
+    /** @test */
+    public function it_should_transform_to_string_as_utf8()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertSame('Hello World 😄', $buffer->toString('utf8'));
+    }
+
+    /** @test */
+    public function it_should_transform_to_string_as_base64()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toString('base64'));
+    }
 }
