@@ -59,8 +59,11 @@ trait Sizeable
      */
     public function resize(int $capacity): Buffable
     {
-        $this->buffer = $this->slice(0, $capacity);
-        $this->length = $capacity;
+        $current = $this->buffer;
+
+        $this->initializeBuffer($capacity, pack("x{$capacity}"));
+
+        $this->buffer = array_replace($this->buffer, $current);
 
         return $this;
     }
