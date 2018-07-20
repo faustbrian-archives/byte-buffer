@@ -95,4 +95,12 @@ class TransformableTest extends TestCase
 
         $this->assertSame('SGVsbG8gV29ybGQg8J+YhA==', $buffer->toString('base64'));
     }
+
+    /** @test */
+    public function it_should_throw_for_invalid_type()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        ByteBuffer::new('Hello World 😄')->toString('_INVALID_');
+    }
 }

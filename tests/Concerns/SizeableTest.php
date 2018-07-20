@@ -42,6 +42,15 @@ class SizeableTest extends TestCase
     }
 
     /** @test */
+    public function it_should_keep_the_given_capacity()
+    {
+        $buffer = ByteBuffer::new('Hello World');
+
+        $this->assertInstanceOf(ByteBuffer::class, $buffer->ensureCapacity(5));
+        $this->assertSame(11, $buffer->capacity());
+    }
+
+    /** @test */
     public function it_should_resize_the_buffer()
     {
         $buffer = ByteBuffer::new('Hello World');
