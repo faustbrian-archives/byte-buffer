@@ -32,13 +32,15 @@ trait Hex
         return $this->unpack("H{$length}");
     }
 
-    public function readHexBytes(int $length): string
+    /**
+     * Reads a base16 encoded string and decode it to binary.
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    public function readHexString(int $length): string
     {
-        return hex2bin($this->readHexRaw($length));
-    }
-
-    public function readHexRaw(int $length): string
-    {
-        return substr($this->hex, $this->offset, $length);
+        return hex2bin(hex2bin($this->readHex($length)));
     }
 }
