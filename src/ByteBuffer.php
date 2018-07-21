@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer;
 
-use BrianFaust\ByteBuffer\Contracts\Buffable;
 use InvalidArgumentException;
 
 /**
@@ -21,14 +20,7 @@ use InvalidArgumentException;
  *
  * @author Brian Faust <envoyer@pm.me>
  */
-class ByteBuffer implements Contracts\Buffable,
-                            Contracts\Initialisable,
-                            Contracts\Offsetable,
-                            Contracts\Positionable,
-                            Contracts\Readable,
-                            Contracts\Sizeable,
-                            Contracts\Transformable,
-                            Contracts\Writeable
+class ByteBuffer
 {
     use Concerns\Initialisable,
         Concerns\Offsetable,
@@ -156,9 +148,9 @@ class ByteBuffer implements Contracts\Buffable,
      *
      * @param array|string|int $value
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function new($value): Buffable
+    public static function new($value): self
     {
         return new static($value);
     }
@@ -168,9 +160,9 @@ class ByteBuffer implements Contracts\Buffable,
      *
      * @param int $capacity
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function allocate(int $capacity): Buffable
+    public static function allocate(int $capacity): self
     {
         return new static($capacity);
     }
@@ -197,9 +189,9 @@ class ByteBuffer implements Contracts\Buffable,
      * @param string|int $value
      * @param int        $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function pack(string $format, $value, int $offset): Buffable
+    public function pack(string $format, $value, int $offset): self
     {
         $this->skip($offset);
 
@@ -248,9 +240,9 @@ class ByteBuffer implements Contracts\Buffable,
      *
      * @param array $buffers
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public static function concat(...$buffers): Buffable
+    public static function concat(...$buffers): self
     {
         $initial = $buffers[0];
 
@@ -267,9 +259,9 @@ class ByteBuffer implements Contracts\Buffable,
      * @param mixed $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function append($value, int $offset = 0): Buffable
+    public function append($value, int $offset = 0): self
     {
         if ($value instanceof self) {
             $value = $value->toArray($offset);
@@ -289,12 +281,12 @@ class ByteBuffer implements Contracts\Buffable,
     /**
      * Appends this ByteBuffers contents to another ByteBuffer.
      *
-     * @param \BrianFaust\ByteBuffer\Contracts\Buffable $buffer
-     * @param int                                       $offset
+     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
+     * @param int                               $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function appendTo(self $buffer, int $offset = 0): Buffable
+    public function appendTo(self $buffer, int $offset = 0): self
     {
         return $buffer->append($this);
     }
@@ -305,9 +297,9 @@ class ByteBuffer implements Contracts\Buffable,
      * @param mixed $value
      * @param int   $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function prepend($value, int $offset = 0): Buffable
+    public function prepend($value, int $offset = 0): self
     {
         if ($value instanceof self) {
             $value = $value->toArray($offset);
@@ -331,12 +323,12 @@ class ByteBuffer implements Contracts\Buffable,
     /**
      * Prepends this ByteBuffers contents to another ByteBuffer.
      *
-     * @param \BrianFaust\ByteBuffer\Contracts\Buffable $buffer
-     * @param int                                       $offset
+     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
+     * @param int                               $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function prependTo(self $buffer, int $offset = 0): Buffable
+    public function prependTo(self $buffer, int $offset = 0): self
     {
         return $buffer->prepend($this, $offset);
     }
@@ -347,9 +339,9 @@ class ByteBuffer implements Contracts\Buffable,
      * @param int $length
      * @param int $start
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function fill(int $length, int $start = 0): Buffable
+    public function fill(int $length, int $start = 0): self
     {
         $this->buffer = array_fill($start, $length, pack('x'));
 
@@ -361,9 +353,9 @@ class ByteBuffer implements Contracts\Buffable,
     /**
      * Makes this ByteBuffer ready for a new sequence of write or relative read operations.
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function flip(): Buffable
+    public function flip(): self
     {
         $this->length = $this->offset;
         $this->offset = 0;
@@ -376,9 +368,9 @@ class ByteBuffer implements Contracts\Buffable,
      *
      * @param int $value
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function order(int $value): Buffable
+    public function order(int $value): self
     {
         $this->order = $value;
 
@@ -391,9 +383,9 @@ class ByteBuffer implements Contracts\Buffable,
      * @param int $start
      * @param int $length
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function reverse(int $start = 0, int $length = 0): Buffable
+    public function reverse(int $start = 0, int $length = 0): self
     {
         $reversed = array_reverse($this->slice($start, $length));
 

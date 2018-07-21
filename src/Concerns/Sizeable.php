@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
-use BrianFaust\ByteBuffer\Contracts\Buffable;
-
 /**
  * This is the sizeable trait.
  *
@@ -37,9 +35,9 @@ trait Sizeable
      *
      * @param int $capacity
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function ensureCapacity(int $capacity): Buffable
+    public function ensureCapacity(int $capacity): self
     {
         $current = $this->capacity();
 
@@ -55,9 +53,9 @@ trait Sizeable
      *
      * @param int $capacity
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function resize(int $capacity): Buffable
+    public function resize(int $capacity): self
     {
         $current = $this->buffer;
 

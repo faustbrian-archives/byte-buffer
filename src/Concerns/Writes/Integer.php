@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns\Writes;
 
-use BrianFaust\ByteBuffer\Contracts\Buffable;
-
 /**
  * This is the integer writer trait.
  *
@@ -28,9 +26,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeInt8(int $value, int $offset = 0): Buffable
+    public function writeInt8(int $value, int $offset = 0): self
     {
         return $this->pack('c', $value, $offset);
     }
@@ -41,9 +39,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeInt16(int $value, int $offset = 0): Buffable
+    public function writeInt16(int $value, int $offset = 0): self
     {
         return $this->pack('s', $value, $offset);
     }
@@ -54,9 +52,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeInt32(int $value, int $offset = 0): Buffable
+    public function writeInt32(int $value, int $offset = 0): self
     {
         return $this->pack('l', $value, $offset);
     }
@@ -67,9 +65,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeInt64(int $value, int $offset = 0): Buffable
+    public function writeInt64(int $value, int $offset = 0): self
     {
         return $this->pack('q', $value, $offset);
     }
@@ -80,9 +78,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeByte(int $value, int $offset = 0): Buffable
+    public function writeByte(int $value, int $offset = 0): self
     {
         return $this->writeInt8($value, $offset);
     }
@@ -93,9 +91,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeShort(int $value, int $offset = 0): Buffable
+    public function writeShort(int $value, int $offset = 0): self
     {
         return $this->writeInt16($value, $offset);
     }
@@ -106,9 +104,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeInt(int $value, int $offset = 0): Buffable
+    public function writeInt(int $value, int $offset = 0): self
     {
         return $this->writeInt32($value, $offset);
     }
@@ -119,9 +117,9 @@ trait Integer
      * @param int $value
      * @param int $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeLong(int $value, int $offset = 0): Buffable
+    public function writeLong(int $value, int $offset = 0): self
     {
         return $this->writeInt64($value, $offset);
     }

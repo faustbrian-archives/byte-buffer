@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns;
 
-use BrianFaust\ByteBuffer\Contracts\Buffable;
-
 /**
  * This is the positionable trait.
  *
@@ -23,7 +21,9 @@ use BrianFaust\ByteBuffer\Contracts\Buffable;
 trait Positionable
 {
     /**
-     * {@inheritdoc}
+     * Gets the absolute read/write offset.
+     *
+     * @return int
      */
     public function current(): int
     {
@@ -31,9 +31,13 @@ trait Positionable
     }
 
     /**
-     * {@inheritdoc}
+     * Sets this ByteBuffers absolute read/write offset.
+     *
+     * @param int $offset
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function position(int $offset): Buffable
+    public function position(int $offset): self
     {
         $this->offset = $offset;
 
@@ -41,9 +45,13 @@ trait Positionable
     }
 
     /**
-     * {@inheritdoc}
+     * Skips the `length` of bytes.
+     *
+     * @param int $length
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function skip(int $length): Buffable
+    public function skip(int $length): self
     {
         $this->offset += $length;
 
@@ -51,9 +59,13 @@ trait Positionable
     }
 
     /**
-     * {@inheritdoc}
+     * Rewinds the `length` of bytes.
+     *
+     * @param int $length
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function rewind(int $length): Buffable
+    public function rewind(int $length): self
     {
         $this->offset -= $length;
 
@@ -61,9 +73,11 @@ trait Positionable
     }
 
     /**
-     * {@inheritdoc}
+     * Resets this ByteBuffers offset.
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function reset(): Buffable
+    public function reset(): self
     {
         $this->offset = 0;
 
@@ -71,9 +85,11 @@ trait Positionable
     }
 
     /**
-     * {@inheritdoc}
+     * Clears this ByteBuffers offsets.
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function clear(): Buffable
+    public function clear(): self
     {
         $this->offset = 0;
         $this->length = count($this->buffer);

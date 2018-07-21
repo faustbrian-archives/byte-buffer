@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer\Concerns\Writes;
 
-use BrianFaust\ByteBuffer\Contracts\Buffable;
-
 /**
  * This is the strings writer trait.
  *
@@ -28,9 +26,9 @@ trait Strings
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeBytes(string $value, int $offset = 0): Buffable
+    public function writeBytes(string $value, int $offset = 0): self
     {
         return $this->append($value, $offset);
     }
@@ -41,9 +39,9 @@ trait Strings
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeString(string $value, int $offset = 0): Buffable
+    public function writeString(string $value, int $offset = 0): self
     {
         return $this->writeUTF8String($value, $offset);
     }
@@ -54,9 +52,9 @@ trait Strings
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeUTF8String(string $value, int $offset = 0): Buffable
+    public function writeUTF8String(string $value, int $offset = 0): self
     {
         $value  = utf8_encode($value);
         $length = strlen($value);
@@ -70,9 +68,9 @@ trait Strings
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeCString(string $value, int $offset = 0): Buffable
+    public function writeCString(string $value, int $offset = 0): self
     {
         $value  = utf8_encode($value.' ');
         $length = strlen($value);
@@ -86,9 +84,9 @@ trait Strings
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeIString(string $value, int $offset = 0): Buffable
+    public function writeIString(string $value, int $offset = 0): self
     {
         $this->fill(3);
         $this->pack('C', strlen($value), 0);
@@ -102,9 +100,9 @@ trait Strings
      * @param string $value
      * @param int    $offset
      *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function writeVString(string $value, int $offset = 0): Buffable
+    public function writeVString(string $value, int $offset = 0): self
     {
         $this->pack('C', strlen($value), 0);
 
