@@ -26,13 +26,22 @@ interface Positionable
     public function position(int $offset): Buffable;
 
     /**
-     * Skips the next `length` bytes. May also be negative to move the offset back.
+     * Skips the `length` of bytes.
      *
      * @param int $length
      *
      * @return \BrianFaust\ByteBuffer\Contracts\Buffable
      */
     public function skip(int $length): Buffable;
+
+    /**
+     * Rewinds the `length` of bytes.
+     *
+     * @param int $length
+     *
+     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     */
+    public function rewind(int $length): Buffable;
 
     /**
      * Resets this ByteBuffers offset.
