@@ -54,6 +54,17 @@ class PositionableTest extends TestCase
     }
 
     /** @test */
+    public function it_should_rewind_the_given_number_of_bytes()
+    {
+        $buffer = ByteBuffer::new(8);
+        $buffer->position(5);
+        $buffer->rewind(3);
+        $buffer->rewind(1);
+
+        $this->assertSame(1, $buffer->current());
+    }
+
+    /** @test */
     public function it_should_reset_the_offset()
     {
         $buffer = ByteBuffer::new(8);

@@ -23,9 +23,7 @@ use BrianFaust\ByteBuffer\Contracts\Buffable;
 trait Positionable
 {
     /**
-     * Gets the absolute read/write offset.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function current(): int
     {
@@ -33,11 +31,7 @@ trait Positionable
     }
 
     /**
-     * Sets this ByteBuffers absolute read/write offset.
-     *
-     * @param int $offset
-     *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * {@inheritdoc}
      */
     public function position(int $offset): Buffable
     {
@@ -47,11 +41,7 @@ trait Positionable
     }
 
     /**
-     * Skips the next `length` bytes. May also be negative to move the offset back.
-     *
-     * @param int $length
-     *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * {@inheritdoc}
      */
     public function skip(int $length): Buffable
     {
@@ -61,9 +51,17 @@ trait Positionable
     }
 
     /**
-     * Resets this ByteBuffers offset.
-     *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * {@inheritdoc}
+     */
+    public function rewind(int $length): Buffable
+    {
+        $this->offset -= $length;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function reset(): Buffable
     {
@@ -73,9 +71,7 @@ trait Positionable
     }
 
     /**
-     * Clears this ByteBuffers offsets.
-     *
-     * @return \BrianFaust\ByteBuffer\Contracts\Buffable
+     * {@inheritdoc}
      */
     public function clear(): Buffable
     {
