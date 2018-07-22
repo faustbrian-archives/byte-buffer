@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer;
 
+use Exception;
 use InvalidArgumentException;
 
 /**
@@ -29,21 +30,6 @@ class ByteBuffer
         Concerns\Sizeable,
         Concerns\Transformable,
         Concerns\Writeable;
-
-    /**
-     * Big endian constant that can be used instead of its numerical value.
-     */
-    const BIG_ENDIAN    = 0;
-
-    /**
-     * Little endian constant that can be used instead of its numerical value.
-     */
-    const LITTLE_ENDIAN = 1;
-
-    /**
-     * Machine byte constant that can be used instead of its numerical value.
-     */
-    const MACHINE_BYTE  = 2;
 
     /**
      * Backing ArrayBuffer.
@@ -164,6 +150,10 @@ class ByteBuffer
      */
     public static function allocate(int $capacity): self
     {
+        if ($capacity < 0) {
+            throw new InvalidArgumentException('Negative integers not supported by ByteBuffer.');
+        }
+
         return new static($capacity);
     }
 
@@ -404,8 +394,16 @@ class ByteBuffer
      */
     public function slice(int $offset, int $length): array
     {
+        if ($offset > $this->capacity()) {
+            throw new Exception('Start exceeds buffer length');
+        }
+
         if ($length <= 0) {
             return $this->buffer;
+        }
+
+        if ($length > $this->capacity()) {
+            throw new Exception('Length exceeds buffer length');
         }
 
         return array_slice($this->buffer, $offset, $length);
@@ -430,7 +428,7 @@ class ByteBuffer
      */
     public function isBigEndian(): bool
     {
-        return 0 === $this->order;
+        return ByteOrder::BE === $this->order;
     }
 
     /**
@@ -440,7 +438,7 @@ class ByteBuffer
      */
     public function isLittleEndian(): bool
     {
-        return 1 === $this->order;
+        return ByteOrder::LE === $this->order;
     }
 
     /**
@@ -450,7 +448,7 @@ class ByteBuffer
      */
     public function isMachineByte(): bool
     {
-        return 2 === $this->order;
+        return ByteOrder::MB === $this->order;
     }
 
     /**

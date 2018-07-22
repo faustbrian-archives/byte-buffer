@@ -43,7 +43,11 @@ trait Initialisable
      */
     public static function fromHex(string $value): self
     {
-        return new static(hex2bin($value));
+        if (strlen($value) > 0 && !ctype_xdigit($value)) {
+            throw new InvalidArgumentException('Buffer::hex: non-hex character passed');
+        }
+
+        return new static(pack('H*', $value));
     }
 
     /**

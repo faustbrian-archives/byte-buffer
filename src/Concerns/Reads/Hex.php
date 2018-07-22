@@ -41,6 +41,6 @@ trait Hex
      */
     public function readHexString(int $length): string
     {
-        return hex2bin($this->readHex($length));
+        return pack('H*', $this->readHex($length));
     }
 }
