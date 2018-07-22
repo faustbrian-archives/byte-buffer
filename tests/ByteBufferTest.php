@@ -286,14 +286,4 @@ class ByteBufferTest extends TestCase
 
         $this->assertTrue($buffer->isMachineByte());
     }
-
-    /** @test */
-    public function it_should_test_if_the_given_value_exceeds_the_maximum()
-    {
-        $buffer = ByteBuffer::allocate(11);
-
-        $this->expectException(\InvalidArgumentException::class);
-
-        $buffer->checkForExcess(0xff, 0xffff);
-    }
 }

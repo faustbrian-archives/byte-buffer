@@ -30,11 +30,7 @@ trait UnsignedInteger
      */
     public function writeUInt8(int $value, int $offset = 0): self
     {
-        $format = 'C';
-
-        $this->checkForExcess(0xff, $value);
-
-        return $this->pack($format, $value, $offset);
+        return $this->pack('C', $value, $offset);
     }
 
     /**
@@ -47,11 +43,7 @@ trait UnsignedInteger
      */
     public function writeUInt16(int $value, int $offset = 0): self
     {
-        $format = ['n', 'v', 'S'][$this->order];
-
-        $this->checkForExcess(0xffff, $value);
-
-        return $this->pack($format, $value, $offset);
+        return $this->pack(['n', 'v', 'S'][$this->order], $value, $offset);
     }
 
     /**
@@ -64,11 +56,7 @@ trait UnsignedInteger
      */
     public function writeUInt32(int $value, int $offset = 0): self
     {
-        $format = ['N', 'V', 'L'][$this->order];
-
-        $this->checkForExcess(0xffffffff, $value);
-
-        return $this->pack($format, $value, $offset);
+        return $this->pack(['N', 'V', 'L'][$this->order], $value, $offset);
     }
 
     /**
@@ -81,11 +69,7 @@ trait UnsignedInteger
      */
     public function writeUInt64(int $value, int $offset = 0): self
     {
-        $format = ['J', 'P', 'Q'][$this->order];
-
-        $this->checkForExcess(0xffffffffffffffff, $value);
-
-        return $this->pack($format, $value, $offset);
+        return $this->pack(['J', 'P', 'Q'][$this->order], $value, $offset);
     }
 
     /**

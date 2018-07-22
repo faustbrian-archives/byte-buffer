@@ -450,17 +450,4 @@ class ByteBuffer
     {
         return ByteOrder::MB === $this->order;
     }
-
-    /**
-     * Check if the actual value exceeds the expected value in size.
-     *
-     * @param int $expected
-     * @param int $actual
-     */
-    public function checkForExcess($expected, $actual): void
-    {
-        if ($actual > $expected) {
-            throw new InvalidArgumentException("{$actual} exceeded length of {$expected}");
-        }
-    }
 }

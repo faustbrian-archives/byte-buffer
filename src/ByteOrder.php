@@ -16,17 +16,17 @@ namespace BrianFaust\ByteBuffer;
 class ByteOrder
 {
     /**
-     * Big endian constant that can be used instead of its numerical value.
+     * Most significant value in the sequence is stored first. Flip no bytes!
      */
     const BE = 0;
 
     /**
-     * Little endian constant that can be used instead of its numerical value.
+     * Least significant value in the sequence is stored first. Flip bytes!
      */
     const LE = 1;
 
     /**
-     * Machine byte constant that can be used instead of its numerical value.
+     * Let the current machine determine the endianess.
      */
     const MB = 2;
 }

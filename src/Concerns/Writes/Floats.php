@@ -30,8 +30,6 @@ trait Floats
      */
     public function writeFloat32(float $value, int $offset = 0): self
     {
-        $this->checkForExcess(0xffffffff, $value);
-
         return $this->pack(['G', 'g', 'f'][$this->order], $value, $offset);
     }
 
@@ -45,8 +43,6 @@ trait Floats
      */
     public function writeFloat64(float $value, int $offset = 0): self
     {
-        $this->checkForExcess(0xffffffffffffffff, $value);
-
         return $this->pack(['E', 'e', 'd'][$this->order], $value, $offset);
     }
 
