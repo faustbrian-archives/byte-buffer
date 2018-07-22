@@ -21,11 +21,21 @@ namespace BrianFaust\ByteBuffer\Concerns;
 trait Sizeable
 {
     /**
-     * Gets the capacity of this ByteBuffers backing buffer.
+     * Gets the length of this ByteBuffers backing buffer.
      *
      * @return int
      */
     public function capacity(): int
+    {
+        return $this->length;
+    }
+
+    /**
+     * Gets the length of the value stored in this ByteBuffer.
+     *
+     * @return int
+     */
+    public function internalSize(): int
     {
         return count($this->buffer);
     }
@@ -73,6 +83,6 @@ trait Sizeable
      */
     public function remaining(): int
     {
-        return $this->length - $this->offset;
+        return $this->capacity() - $this->offset;
     }
 }

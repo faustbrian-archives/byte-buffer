@@ -130,7 +130,7 @@ class ByteBuffer
     }
 
     /**
-     * Allocates a new ByteBuffer backed by a buffer of the specified capacity.
+     * Allocates a new ByteBuffer backed by a buffer with the specified data.
      *
      * @param array|string|int $value
      *

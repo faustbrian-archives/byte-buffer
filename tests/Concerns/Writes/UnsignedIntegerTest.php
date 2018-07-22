@@ -30,7 +30,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt8(8);
 
-        $this->assertSame(1, $buffer->capacity());
+        $this->assertSame(1, $buffer->internalSize());
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt16(16);
 
-        $this->assertSame(2, $buffer->capacity());
+        $this->assertSame(2, $buffer->internalSize());
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt32(32);
 
-        $this->assertSame(4, $buffer->capacity());
+        $this->assertSame(4, $buffer->internalSize());
     }
 
     /** @test */
@@ -57,7 +57,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt64(64);
 
-        $this->assertSame(8, $buffer->capacity());
+        $this->assertSame(8, $buffer->internalSize());
     }
 
     /** @test */
@@ -66,7 +66,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUByte(8);
 
-        $this->assertSame(1, $buffer->capacity());
+        $this->assertSame(1, $buffer->internalSize());
     }
 
     /** @test */
@@ -75,7 +75,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUShort(15);
 
-        $this->assertSame(2, $buffer->capacity());
+        $this->assertSame(2, $buffer->internalSize());
     }
 
     /** @test */
@@ -84,7 +84,7 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeUInt(32);
 
-        $this->assertSame(4, $buffer->capacity());
+        $this->assertSame(4, $buffer->internalSize());
     }
 
     /** @test */
@@ -93,6 +93,6 @@ class UnsignedIntegerTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeULong(64);
 
-        $this->assertSame(8, $buffer->capacity());
+        $this->assertSame(8, $buffer->internalSize());
     }
 }

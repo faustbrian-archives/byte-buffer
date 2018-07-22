@@ -30,7 +30,7 @@ class FloatsTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeFloat32(8.0);
 
-        $this->assertSame(4, $buffer->capacity());
+        $this->assertSame(4, $buffer->internalSize());
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class FloatsTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeFloat64(8.0);
 
-        $this->assertSame(8, $buffer->capacity());
+        $this->assertSame(8, $buffer->internalSize());
     }
 
     /** @test */
@@ -48,6 +48,6 @@ class FloatsTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->writeDouble(8.0);
 
-        $this->assertSame(8, $buffer->capacity());
+        $this->assertSame(8, $buffer->internalSize());
     }
 }

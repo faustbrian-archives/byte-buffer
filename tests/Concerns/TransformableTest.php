@@ -65,6 +65,30 @@ class TransformableTest extends TestCase
     }
 
     /** @test */
+    public function it_should_transform_to_gmp()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertInstanceOf(\GMP::class, $buffer->toGmp());
+    }
+
+    /** @test */
+    public function it_should_transform_to_gmp_integer()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertSame(8245075110447257732, $buffer->toGmpInt());
+    }
+
+    /** @test */
+    public function it_should_transform_to_gmp_string()
+    {
+        $buffer = ByteBuffer::new('Hello World 😄');
+
+        $this->assertSame('96231036770496640978624582588703938692', $buffer->toGmpString());
+    }
+
+    /** @test */
     public function it_should_transform_to_string_as_binary()
     {
         $buffer = ByteBuffer::new('Hello World 😄');

@@ -31,7 +31,7 @@ class HexTest extends TestCase
         $buffer->writeHex('48656c6c6f20576f726c64');
         $buffer->position(0);
 
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
         $this->assertSame('Hello World', $buffer->readHexString(22));
     }
 }

@@ -45,7 +45,7 @@ trait Positionable
     }
 
     /**
-     * Skips the `length` of bytes.
+     * Skips N amount of bytes.
      *
      * @param int $length
      *
@@ -59,7 +59,7 @@ trait Positionable
     }
 
     /**
-     * Rewinds the `length` of bytes.
+     * Rewinds N amount of bytes.
      *
      * @param int $length
      *

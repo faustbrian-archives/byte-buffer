@@ -64,7 +64,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new(str_split('Hello World'));
 
         $this->assertInstanceOf(ByteBuffer::class, $buffer);
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new(11);
 
         $this->assertInstanceOf(ByteBuffer::class, $buffer);
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
     }
 
     /** @test */
@@ -82,7 +82,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new('Hello World');
 
         $this->assertInstanceOf(ByteBuffer::class, $buffer);
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
     }
 
     /** @test */
@@ -99,7 +99,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::allocate(11);
 
         $this->assertInstanceOf(ByteBuffer::class, $buffer);
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
     }
 
     /** @test */
@@ -109,7 +109,7 @@ class ByteBufferTest extends TestCase
         $buffer->initializeBuffer(11, 'Hello World');
 
         $this->assertSame('Hello World', $buffer->toUTF8());
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
     }
 
     /** @test */
@@ -213,7 +213,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new(1);
         $buffer->fill(11);
 
-        $this->assertSame(11, $buffer->capacity());
+        $this->assertSame(11, $buffer->internalSize());
     }
 
     /** @test */
@@ -222,7 +222,7 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new(10);
         $buffer->flip();
 
-        $this->assertSame(10, $buffer->capacity());
+        $this->assertSame(10, $buffer->internalSize());
         $this->assertSame(0, $buffer->current());
     }
 

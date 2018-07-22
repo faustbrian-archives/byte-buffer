@@ -45,7 +45,7 @@ trait Transformable
      */
     public function toHex(int $offset = 0, int $length = 0): string
     {
-        return bin2hex($this->toBinary($offset, $length));
+        return unpack('H*', $this->toBinary($offset, $length))[1];
     }
 
     /**
@@ -85,6 +85,36 @@ trait Transformable
     public function toArray(int $offset = 0, int $length = 0): array
     {
         return $this->slice($offset, $length);
+    }
+
+    /**
+     * Get the buffer as a GMP object.
+     *
+     * @return \GMP
+     */
+    public function toGmp(): \GMP
+    {
+        return gmp_init($this->toHex(), 16);
+    }
+
+    /**
+     * Get the buffer as a GMP object and turn it into an integer.
+     *
+     * @return int
+     */
+    public function toGmpInt(): int
+    {
+        return gmp_intval($this->toGmp());
+    }
+
+    /**
+     * Get the buffer as a GMP object and turn it into a string.
+     *
+     * @return string
+     */
+    public function toGmpString(): string
+    {
+        return gmp_strval($this->toGmp(), 10);
     }
 
     /**

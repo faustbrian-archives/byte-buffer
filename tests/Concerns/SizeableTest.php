@@ -33,6 +33,14 @@ class SizeableTest extends TestCase
     }
 
     /** @test */
+    public function it_should_return_the_internal_capacity()
+    {
+        $buffer = ByteBuffer::new(8);
+
+        $this->assertSame(8, $buffer->internalSize());
+    }
+
+    /** @test */
     public function it_should_ensure_the_given_capacity()
     {
         $buffer = ByteBuffer::new('Hello World');
