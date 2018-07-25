@@ -103,6 +103,14 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
+    public function it_should_fail_to_allocate_the_given_number_of_bytes()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        ByteBuffer::allocate(-1);
+    }
+
+    /** @test */
     public function it_should_initialise_the_buffer()
     {
         $buffer = ByteBuffer::allocate(11);
@@ -250,6 +258,22 @@ class ByteBufferTest extends TestCase
         $buffer = ByteBuffer::new('Hello World');
 
         $this->assertSame(str_split('Hello'), $buffer->slice(0, 5));
+    }
+
+    /** @test */
+    public function it_should_fail_to_slice_the_buffer_contents_if_offset_is_to_big()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        ByteBuffer::new('Hello World')->slice(16, 5);
+    }
+
+    /** @test */
+    public function it_should_fail_to_slice_the_buffer_contents_if_length_is_to_big()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        ByteBuffer::new('Hello World')->slice(0, 16);
     }
 
     /** @test */

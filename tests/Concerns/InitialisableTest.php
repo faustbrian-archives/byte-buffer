@@ -43,6 +43,14 @@ class InitialisableTest extends TestCase
     }
 
     /** @test */
+    public function it_should_fail_to_initialise_from_hex()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        ByteBuffer::fromHex('😄');
+    }
+
+    /** @test */
     public function it_should_initialise_from_utf8()
     {
         $buffer = ByteBuffer::fromUTF8('Hello World 😄');

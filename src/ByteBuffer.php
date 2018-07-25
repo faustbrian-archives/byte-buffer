@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace BrianFaust\ByteBuffer;
 
-use Exception;
 use InvalidArgumentException;
 
 /**
@@ -395,7 +394,7 @@ class ByteBuffer
     public function slice(int $offset, int $length): array
     {
         if ($offset > $this->capacity()) {
-            throw new Exception('Start exceeds buffer length');
+            throw new InvalidArgumentException('Start exceeds buffer length');
         }
 
         if ($length <= 0) {
@@ -403,7 +402,7 @@ class ByteBuffer
         }
 
         if ($length > $this->capacity()) {
-            throw new Exception('Length exceeds buffer length');
+            throw new InvalidArgumentException('Length exceeds buffer length');
         }
 
         return array_slice($this->buffer, $offset, $length);
