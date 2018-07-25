@@ -342,12 +342,15 @@ class ByteBuffer
     /**
      * Makes this ByteBuffer ready for a new sequence of write or relative read operations.
      *
+     * @param mixed $bytes
+     *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
-    public function flip(): self
+    public function flip(int $start = 0, int $length = 0): self
     {
-        $this->length = $this->offset;
-        $this->offset = 0;
+        $reversed = array_reverse($this->slice($start, $length));
+
+        $this->initializeBuffer(count($reversed), $reversed);
 
         return $this;
     }
@@ -376,11 +379,7 @@ class ByteBuffer
      */
     public function reverse(int $start = 0, int $length = 0): self
     {
-        $reversed = array_reverse($this->slice($start, $length));
-
-        $this->initializeBuffer(count($reversed), $reversed);
-
-        return $this;
+        return $this->flip($start, $length);
     }
 
     /**
