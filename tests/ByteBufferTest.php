@@ -277,6 +277,15 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
+    public function it_should_compare_if_the_buffers_are_equal()
+    {
+        $buffer1 = ByteBuffer::allocate(11);
+        $buffer2 = ByteBuffer::allocate(11);
+
+        $this->assertTrue($buffer1->equals($buffer2));
+    }
+
+    /** @test */
     public function it_should_test_if_the_given_value_is_a_byte_buffer()
     {
         $buffer = ByteBuffer::allocate(11);

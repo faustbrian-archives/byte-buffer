@@ -409,7 +409,20 @@ class ByteBuffer
     }
 
     /**
-     * Tests if the given value is a ByteBuffer.
+     * Determine if the given value is a ByteBuffer.
+     *
+     * @param \BrianFaust\ByteBuffer\ByteBuffer $buffer
+     *
+     * @return bool
+     */
+    public function equals(self $buffer): bool
+    {
+        return $buffer->capacity() === $this->capacity()
+             && $buffer->toBinary() === $this->toBinary();
+    }
+
+    /**
+     * Determine if the given value is a ByteBuffer.
      *
      * @param mixed $value
      *
@@ -421,7 +434,7 @@ class ByteBuffer
     }
 
     /**
-     * Tests if the byte order is set to big endian.
+     * Determine if the byte order is set to big endian.
      *
      * @return bool
      */
@@ -431,7 +444,7 @@ class ByteBuffer
     }
 
     /**
-     * Tests if the byte order is set to little endian.
+     * Determine if the byte order is set to little endian.
      *
      * @return bool
      */
@@ -441,7 +454,7 @@ class ByteBuffer
     }
 
     /**
-     * Tests if the byte order is set to machine byte.
+     * Determine if the byte order is set to machine byte.
      *
      * @return bool
      */
