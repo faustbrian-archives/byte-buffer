@@ -340,9 +340,10 @@ class ByteBuffer
     }
 
     /**
-     * Makes this ByteBuffer ready for a new sequence of write or relative read operations.
+     * Flip byte order of this buffers contents.
      *
-     * @param mixed $bytes
+     * @param int $start
+     * @param int $length
      *
      * @return \BrianFaust\ByteBuffer\ByteBuffer
      */
@@ -356,21 +357,7 @@ class ByteBuffer
     }
 
     /**
-     * Sets the byte order.
-     *
-     * @param int $value
-     *
-     * @return \BrianFaust\ByteBuffer\ByteBuffer
-     */
-    public function order(int $value): self
-    {
-        $this->order = $value;
-
-        return $this;
-    }
-
-    /**
-     * Reverses this ByteBuffers contents.
+     * Reverses this ByteBuffers contents. This is an alias of flip.
      *
      * @param int $start
      * @param int $length
@@ -380,6 +367,21 @@ class ByteBuffer
     public function reverse(int $start = 0, int $length = 0): self
     {
         return $this->flip($start, $length);
+    }
+
+    /**
+     * Sets the byte order.
+     *
+     * @param int $value
+     *
+     * @return \BrianFaust\ByteBuffer\ByteBuffer
+     */
+    public function order(int $value): self
+    {
+        dd(pack("Cv", 0xfd, 2));
+        $this->order = $value;
+
+        return $this;
     }
 
     /**
