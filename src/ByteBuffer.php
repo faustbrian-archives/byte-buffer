@@ -378,7 +378,6 @@ class ByteBuffer
      */
     public function order(int $value): self
     {
-        dd(pack("Cv", 0xfd, 2));
         $this->order = $value;
 
         return $this;
