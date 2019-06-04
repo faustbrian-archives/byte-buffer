@@ -56,7 +56,7 @@ trait Strings
      */
     public function writeUTF8String(string $value, int $offset = 0): self
     {
-        $value  = utf8_encode($value);
+        $value = utf8_encode($value);
         $length = strlen($value);
 
         return $this->pack("a{$length}", $value, $offset);
@@ -72,7 +72,7 @@ trait Strings
      */
     public function writeCString(string $value, int $offset = 0): self
     {
-        $value  = utf8_encode($value.' ');
+        $value = utf8_encode($value.' ');
         $length = strlen($value);
 
         return $this->pack("Z{$length}", $value, $offset);
