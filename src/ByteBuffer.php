@@ -164,7 +164,7 @@ class ByteBuffer
      */
     public function initializeBuffer(int $length, $content): void
     {
-        for ($i = 0; $i < $length; ++$i) {
+        for ($i = 0; $i < $length; $i++) {
             $this->buffer[$i] = $content[$i];
         }
 
@@ -186,7 +186,7 @@ class ByteBuffer
 
         $bytes = pack($format, $value);
 
-        for ($i = 0; $i < strlen($bytes); ++$i) {
+        for ($i = 0; $i < strlen($bytes); $i++) {
             $this->buffer[$this->offset++] = $bytes[$i];
         }
 

@@ -227,12 +227,12 @@ class ByteBufferTest extends TestCase
     /** @test */
     public function it_should_flip_the_buffer_contents()
     {
-        $buffer = ByteBuffer::new("Hello World");
+        $buffer = ByteBuffer::new('Hello World');
         $buffer->flip();
 
         $this->assertSame(11, $buffer->internalSize());
         $this->assertSame(0, $buffer->current());
-        $this->assertSame("dlroW olleH", $buffer->toUTF8());
+        $this->assertSame('dlroW olleH', $buffer->toUTF8());
     }
 
     /** @test */
