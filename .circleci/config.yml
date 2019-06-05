@@ -12,9 +12,9 @@ jobs:
       - run:
           name: Install System Dependencies
           command: sudo apt-get install libgmp-dev
-    #   - run:
-    #       name: Install GMP Extension
-    #       command: sudo docker-php-ext-install gmp && sudo docker-php-ext-enable gmp
+      - run:
+          name: Install GMP Extension
+          command: sudo docker-php-ext-install gmp && sudo docker-php-ext-enable gmp
     #   - run:
     #       name: Install BCMATH Extension
     #       command: sudo docker-php-ext-install bcmath && sudo docker-php-ext-enable bcmath
