@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.2-cli
-    working_directory: ~/arkecosystem/crypto
+    working_directory: ~/byte-buffer
     steps:
       - checkout
       - run:
