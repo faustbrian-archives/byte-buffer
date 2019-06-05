@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of ByteBuffer.
  *
- * (c) Brian Faust <envoyer@pm.me>
+ * (c) Brian Faust <hello@basecode.sh>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,7 +18,7 @@ use InvalidArgumentException;
 /**
  * This is the transformable trait.
  *
- * @author Brian Faust <envoyer@pm.me>
+ * @author Brian Faust <hello@basecode.sh>
  */
 trait Transformable
 {

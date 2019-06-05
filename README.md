@@ -2,10 +2,10 @@
 
 > A fast and simple ByteBuffer implementation using native arrays.
 
-[![Build Status](https://travis-ci.org/faustbrian/byte-buffer.svg)](https://travis-ci.org/faustbrian/byte-buffer)
-[![Codecov](https://img.shields.io/codecov/c/github/faustbrian/byte-buffer/master.svg)](https://codecov.io/gh/faustbrian/byte-buffer)
-[![Latest Version](https://img.shields.io/github/release/faustbrian/byte-buffer.svg)](https://github.com/faustbrian/byte-buffer/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Latest Version](https://badgen.now.sh/packagist/v/faustbrian/byte-buffer)](https://packagist.org/packages/faustbrian/byte-buffer)
+[![Build Status](https://badgen.now.sh/circleci/github/faustbrian/byte-buffer)](https://circleci.com/gh/faustbrian/byte-buffer)
+[![Codecov](https://badgen.now.sh/codecov/c/github/faustbrian/byte-buffer)](https://codecov.io/gh/faustbrian/byte-buffer)
+[![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
 ## Documentation
 
@@ -13,7 +13,7 @@
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an e-mail to envoyer@pm.me. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this package, please send an e-mail to hello@basecode.sh. All security vulnerabilities will be promptly addressed.
 
 ## Credits
 
