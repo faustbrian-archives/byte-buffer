@@ -166,6 +166,7 @@ class ByteBufferTest extends TestCase
         $buffer->append(ByteBuffer::new('World'));
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
+        $this->assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
     }
 
     /** @test */
@@ -175,6 +176,7 @@ class ByteBufferTest extends TestCase
         $buffer->append('World');
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
+        $this->assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
     }
 
     /** @test */
@@ -185,6 +187,7 @@ class ByteBufferTest extends TestCase
         ByteBuffer::new('World')->appendTo($buffer);
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
+        $this->assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
     }
 
     /** @test */
@@ -194,6 +197,7 @@ class ByteBufferTest extends TestCase
         $buffer->prepend(ByteBuffer::new('Hello'));
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
+        $this->assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
     }
 
     /** @test */
@@ -203,6 +207,7 @@ class ByteBufferTest extends TestCase
         $buffer->prepend('Hello');
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
+        $this->assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
     }
 
     /** @test */
@@ -213,6 +218,7 @@ class ByteBufferTest extends TestCase
         ByteBuffer::new('Hello')->prependTo($buffer);
 
         $this->assertSame('HelloWorld', $buffer->toUTF8());
+        $this->assertSame($buffer->capacity(), $buffer->current()); // offset should be at the end of new buffer
     }
 
     /** @test */

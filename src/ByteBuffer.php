@@ -262,7 +262,9 @@ class ByteBuffer
 
         $buffer = array_merge($this->buffer, $value);
 
-        $this->initializeBuffer(count($buffer), $buffer);
+        $bufferCount = count($buffer);
+        $this->initializeBuffer($bufferCount, $buffer);
+        $this->position($bufferCount); // move current offset to the end of merged buffer after append
 
         return $this;
     }
@@ -304,7 +306,9 @@ class ByteBuffer
             array_unshift($buffer, $item);
         }
 
-        $this->initializeBuffer(count($buffer), $buffer);
+        $bufferCount = count($buffer);
+        $this->initializeBuffer($bufferCount, $buffer);
+        $this->position($bufferCount); // move current offset to the end of merged buffer after prepend
 
         return $this;
     }
