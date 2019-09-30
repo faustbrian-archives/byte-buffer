@@ -336,9 +336,13 @@ class ByteBuffer
      */
     public function fill(int $length, int $start = 0): self
     {
-        $this->buffer = array_fill($start, $length, pack('x'));
+        if ($start > 0) {
+            $this->position($start);
+        }
 
-        $this->skip($length);
+        for ($i = 0; $i < $length; $i++) {
+            $this->buffer[$this->offset++] = pack('x');
+        }
 
         return $this;
     }
