@@ -231,6 +231,16 @@ class ByteBufferTest extends TestCase
     }
 
     /** @test */
+    public function it_should_fill_the_buffer_starting_from_current_position()
+    {
+        $buffer = ByteBuffer::new("hello");
+        $buffer->position(4);
+        $buffer->fill(11);
+
+        $this->assertSame(4 + 11, $buffer->internalSize());
+    }
+
+    /** @test */
     public function it_should_flip_the_buffer_contents()
     {
         $buffer = ByteBuffer::new('Hello World');
