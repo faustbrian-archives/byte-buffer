@@ -22,13 +22,13 @@ use InvalidArgumentException;
  */
 class ByteBuffer
 {
-    use Concerns\Initialisable,
-        Concerns\Offsetable,
-        Concerns\Positionable,
-        Concerns\Readable,
-        Concerns\Sizeable,
-        Concerns\Transformable,
-        Concerns\Writeable;
+    use Concerns\Initialisable;
+    use Concerns\Offsetable;
+    use Concerns\Positionable;
+    use Concerns\Readable;
+    use Concerns\Sizeable;
+    use Concerns\Transformable;
+    use Concerns\Writeable;
 
     /**
      * Backing ArrayBuffer.
